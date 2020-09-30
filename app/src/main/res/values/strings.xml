@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MyHomeWorkout</string>
+    <string name="createAccountInfo">Crear una cuenta te permite tener control de tu progreso.</string>
+    <string name="user_input">Usuario:</string>
+    <string name="Password_input">Contraseña:</string>
+    <string name="LogIn">Iniciar Sesión</string>
+    <string name="preguntaCuenta">¿Aun no tienes cuenta?</string>
+    <string name="crear_cuenta"><u>Crear cuenta</u></string>
+    <string name="gender">Ingresa tu género.</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
+    <string name="nacimiento">Ingresa tu fecha de nacimiento.</string>
 </resources>
