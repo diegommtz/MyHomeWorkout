@@ -6,4 +6,10 @@
     <color name="white">#ffff</color>
     <color name="logo_bg">#f7f7f7</color>
     <color name="azul_link">#000CFC</color>
+
+    <color name="pink_slack">#cf0e5b</color>
+    <color name="yellow_slack">#e2a52e</color>
+    <color name="green_slack">#3aae84</color>
+    <color name="blue_slack">#6ec4cb</color>
+
 </resources>
