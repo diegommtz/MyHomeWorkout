@@ -10,4 +10,17 @@
     <string name="hombre">Hombre</string>
     <string name="mujer">Mujer</string>
     <string name="nacimiento">Ingresa tu fecha de nacimiento.</string>
+    <string name="entrenamientos">Entrenamientos</string>
+    <string name="kilos">Kilos</string>
+    <string name="objetivos">Objetivos</string>
+    <string name="miPlan">Mi workout plan</string>
+    <string name="peso_ideal">Peso Ideal</string>
+    <string name="imc">IMC</string>
+    <string name="meta">Meta</string>
+    <string name="horario">Horario</string>
+    <string name="peso_inicial">Peso Inicial</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="perfil">Perfil</string>
+    <string name="genero">Género</string>
+
 </resources>

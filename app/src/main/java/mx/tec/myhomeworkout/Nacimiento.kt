@@ -20,7 +20,7 @@ class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nacimiento)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         btnCalendar.setOnClickListener{
             GetCalendarDate()
             DatePickerDialog(this@Nacimiento, this, year, month, day ).show()
