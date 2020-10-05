@@ -9,29 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ProfileAct" android:label="@string/perfil">
+        <activity android:name=".PaginaInicial"
+            android:screenOrientation="portrait"
+            android:theme="@style/noToolBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Nacimiento" android:parentActivityName=".Genero" android:label="@string/genero">
-
+        <activity
+            android:name=".ProfileAct"
+            android:label="@string/perfil" android:screenOrientation="portrait">
         </activity>
-
-        <activity android:name=".Genero" ></activity>
-
+        <activity
+            android:name=".Nacimiento"
+            android:screenOrientation="portrait"
+            android:label="@string/genero"
+            android:parentActivityName=".Genero"></activity>
+        <activity android:name=".Genero"></activity>
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/splashTheme"></activity>
-
+            android:theme="@style/splashTheme" />
     </application>
 
 </manifest>

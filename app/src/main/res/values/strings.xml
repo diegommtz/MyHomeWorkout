@@ -22,5 +22,10 @@
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="perfil">Perfil</string>
     <string name="genero">Género</string>
+    <string name="estas_a_parte1">¡Estas a </string>
+    <string name="estas_a_parte2"> kilos de tu peso ideal!</string>
+    <string name="entrenamiento_de_hoy">Entrenamiento de hoy: </string>
+    <string name="entrenar">Comenzar entrenamiento</string>
+    <string name="ejercicios">Ejercicios</string>
 
 </resources>
