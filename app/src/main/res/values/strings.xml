@@ -28,4 +28,18 @@
     <string name="entrenar">Comenzar entrenamiento</string>
     <string name="ejercicios">Ejercicios</string>
 
+    <string name="tvDay">Día</string>
+    <string name="tvTiempoEstimado">TiempoEstimado</string>
+    <string name="tvNombreEjercicio">Glute bridge</string>
+
+    <string-array name="dayArray">
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+    </string-array>
+
 </resources>

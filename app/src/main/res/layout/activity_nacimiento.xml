@@ -109,7 +109,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/circular_btn"
                 android:scaleType="centerInside"
-                android:src="@drawable/flecha_derecha" />
+                android:src="@drawable/flecha_izquierda" />
         </LinearLayout>
 
     </LinearLayout>
