@@ -16,6 +16,7 @@
     <string name="miPlan">Mi workout plan</string>
     <string name="peso_ideal">Peso Ideal</string>
     <string name="imc">IMC</string>
+    <string name="imc2">IMC: </string>
     <string name="meta">Meta</string>
     <string name="horario">Horario</string>
     <string name="peso_inicial">Peso Inicial</string>
@@ -27,5 +28,25 @@
     <string name="entrenamiento_de_hoy">Entrenamiento de hoy: </string>
     <string name="entrenar">Comenzar entrenamiento</string>
     <string name="ejercicios">Ejercicios</string>
+    <string name="meta2">¿Cuál es tu meta?</string>
+    <string name="perderP">Perder peso</string>
+    <string name="ganarM">Ganar músculo</string>
+    <string name="estarF">Estar en forma</string>
+    <string name="tonificar">Tonificar y sentirse saludable</string>
+    <string name="crecer">Crecer masa y fuerza</string>
+    <string name="motivado">Estar motivado y energético</string>
+    <string name="dia">¿Qué días entrenas?</string>
+    <string name="hora">¿A qué hora?</string>
+    <string name="L">L</string>
+    <string name="M">M</string>
+    <string name="J">J</string>
+    <string name="V">V</string>
+    <string name="S">S</string>
+    <string name="D">D</string>
+    <string name="Inicio">Inicio</string>
+    <string name="Fin">Fin</string>
+    <string name="peso">Peso: </string>
+    <string name="monitorea">Monitorea tu progreso</string>
+    <string name="selecciona">Selecciona un intervalo de tiempo para visualizar tu información.</string>
 
 </resources>
