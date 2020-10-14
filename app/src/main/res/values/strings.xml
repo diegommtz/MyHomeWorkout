@@ -29,7 +29,7 @@
     <string name="ejercicios">Ejercicios</string>
 
     <string name="tvDay">Día</string>
-    <string name="tvTiempoEstimado">TiempoEstimado</string>
+    <string name="tvTiempoEstimado">Tiempo Estimado</string>
     <string name="tvNombreEjercicio">Glute bridge</string>
 
     <string-array name="dayArray">
@@ -41,5 +41,12 @@
         <item>Viernes</item>
         <item>Sábado</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--fragment_info-->
+    <string name="txtDificultad">NIVEL DE DIFICULTAD</string>
+    <string name="txtFocalizacion">FOCALIZACIÓN</string>
+    <string name="txtMusculosInv">MÚSCULOS INVOLUCRADOS</string>
 
 </resources>
