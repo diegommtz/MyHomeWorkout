@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MonitoreaProgresoGraficas"></activity>
+        <activity android:name=".Grafica"></activity>
+        <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
         <activity android:name=".Horario" />
         <activity android:name=".Objetivo" />
