@@ -8,6 +8,29 @@
     android:padding="20dp"
     tools:context=".MonitoreaProgresoGraficas">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/yellow_slack"
+            android:text="@string/graficas" />
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/blue_slack"
+            android:text="@string/fotos" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="match_parent"

@@ -6,6 +6,6 @@ import android.os.Bundle
 class MonitoreaProceso : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_monitorea_proceso_fotos)
+        setContentView(R.layout.activity_monitorea_progreso_fotos)
     }
 }
