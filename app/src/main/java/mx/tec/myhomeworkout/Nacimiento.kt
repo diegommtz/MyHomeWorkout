@@ -2,8 +2,10 @@ package mx.tec.myhomeworkout
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import kotlinx.android.synthetic.main.activity_nacimiento.*
@@ -22,6 +24,11 @@ class Nacimiento : AppCompatActivity(){ //, DatePickerDialog.OnDateSetListener {
         setContentView(R.layout.activity_nacimiento)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+    }
+
+    fun genero(view: View){
+        val intent = Intent(this@Nacimiento, Nacimiento::class.java)
+        startActivity(intent)
     }
 /*
     fun GetCalendarDate(){

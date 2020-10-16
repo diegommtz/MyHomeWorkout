@@ -12,12 +12,13 @@
         <activity android:name=".HaciendoEjercicio"/>
 
 
-        <activity android:name=".PrevisRutina"
+        <activity
+            android:name=".PrevisRutina"
             android:label=""
             android:parentActivityName=".PaginaInicial"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Grafica"></activity>
+        <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
         <activity android:name=".Horario" />
