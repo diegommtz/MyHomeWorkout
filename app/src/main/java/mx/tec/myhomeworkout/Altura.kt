@@ -22,4 +22,5 @@ class Altura : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }

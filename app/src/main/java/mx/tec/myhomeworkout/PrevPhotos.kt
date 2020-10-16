@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_prev_photos.*
+import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
 import java.lang.Exception
 
 class PrevPhotos : AppCompatActivity() {
@@ -26,6 +28,10 @@ class PrevPhotos : AppCompatActivity() {
 
         pickerFoto.setOnClickListener{
             SelectImage()
+        }
+        btnNext.setOnClickListener {
+            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+            startActivity(intent)
         }
     }
 

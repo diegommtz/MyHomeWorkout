@@ -21,9 +21,8 @@ class Peso : AppCompatActivity() {
         pesoDecimalesPicker.maxValue = 9
 
         btnNext.setOnClickListener{
-            TODO("Enviar a página de mi meta")
-            //val intent = Intent(this@Peso, Peso::class.java)
-            //startActivity(intent)
+            val intent = Intent(this@Peso, Objetivo::class.java)
+            startActivity(intent)
         }
     }
 }

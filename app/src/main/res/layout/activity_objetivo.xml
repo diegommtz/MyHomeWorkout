@@ -77,7 +77,7 @@
             android:src="@drawable/flecha_izquierda" />
 
         <ImageButton
-            android:id="@+id/btnNext2"
+            android:id="@+id/btnNext"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|end"

@@ -1,8 +1,10 @@
 package mx.tec.myhomeworkout
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import kotlinx.android.synthetic.main.activity_previs_rutina.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterParent
@@ -14,6 +16,11 @@ class PrevisRutina : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_previs_rutina)
+
+        comenzarRutina.setOnClickListener {
+            val intent = Intent(this@PrevisRutina, HaciendoEjercicio::class.java)
+            startActivity(intent)
+        }
 
         val dataChild1 = listOf(
             ElementChild("Squats", R.drawable.mujer_plancking, "10 repeticiones"),
