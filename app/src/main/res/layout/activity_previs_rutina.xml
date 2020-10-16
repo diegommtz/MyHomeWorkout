@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical"
+    tools:context=".PrevisRutina">
+
+    <TextView
+        android:id="@+id/tvDia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Viernes"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvNombreRutina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full Body"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/tiempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_corners_btn"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvTiempoEstimado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="30 Minutos"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvTiempoEstimadoStatic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiempo estimado"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="-80dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="bottom">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_btn"
+            android:text="@string/comenzar"
+            android:textColor="#FFFFFF" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -9,7 +9,7 @@ import android.widget.TimePicker
 import kotlinx.android.synthetic.main.activity_nacimiento.*
 import java.util.*
 
-class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+class Nacimiento : AppCompatActivity(){ //, DatePickerDialog.OnDateSetListener {
     var day = 0
     var month = 0
     var year = 0
@@ -21,12 +21,9 @@ class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nacimiento)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        btnCalendar.setOnClickListener{
-            GetCalendarDate()
-            DatePickerDialog(this@Nacimiento, this, year, month, day ).show()
-        }
-    }
 
+    }
+/*
     fun GetCalendarDate(){
         val cal = Calendar.getInstance()
         day = cal.get(Calendar.DAY_OF_WEEK)
@@ -43,5 +40,5 @@ class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         tvNacimiento.text = "" + savedDay + "-" + savedMonth + "-" + savedYear
     }
 
-
+*/
 }

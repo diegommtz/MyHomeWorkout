@@ -1,10 +1,12 @@
 package mx.tec.myhomeworkout
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
@@ -30,5 +32,10 @@ class PaginaInicial : AppCompatActivity() {
         rvLista.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
 
         rvLista.adapter = adaptador
+
+        btnPrevis.setOnClickListener {
+            val intent = Intent(this@PaginaInicial, PrevisRutina::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -9,8 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HaciendoEjercicio">
+        <activity android:name=".HaciendoEjercicio"/>
 
+
+        <activity android:name=".PrevisRutina"
+            android:label=""
+            android:parentActivityName=".PaginaInicial"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".Grafica"></activity>
+        <activity android:name=".MonitoreaProgresoGraficas" />
+        <activity android:name=".MonitoreaProceso" />
+        <activity android:name=".Horario" />
+        <activity android:name=".Objetivo" />
+
+        <activity
+            android:name=".PaginaInicial"
+            android:screenOrientation="portrait"
+            android:theme="@style/noToolBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,15 +36,9 @@
 
         </activity>
         <activity
-            android:name=".PaginaInicial"
-            android:screenOrientation="portrait"
-            android:theme="@style/noToolBar">
-
-        </activity>
-        <activity
             android:name=".ProfileAct"
             android:label="@string/perfil"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Nacimiento"
             android:label="@string/genero"
