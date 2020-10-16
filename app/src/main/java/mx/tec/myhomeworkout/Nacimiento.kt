@@ -5,13 +5,14 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
+import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_nacimiento.*
+import kotlinx.android.synthetic.main.activity_nacimiento.btnNext
 import java.util.*
 
-class Nacimiento : AppCompatActivity(){ //, DatePickerDialog.OnDateSetListener {
+class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     var day = 0
     var month = 0
     var year = 0
@@ -23,14 +24,17 @@ class Nacimiento : AppCompatActivity(){ //, DatePickerDialog.OnDateSetListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nacimiento)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        /*btnCalendar.setOnClickListener{
+            GetCalendarDate()
+            DatePickerDialog(this@Nacimiento, this, year, month, day ).show()
+        }*/
 
+        btnNext.setOnClickListener {
+            val intent = Intent(this@Nacimiento, Altura::class.java)
+            startActivity(intent)
+        }
     }
 
-    fun genero(view: View){
-        val intent = Intent(this@Nacimiento, Nacimiento::class.java)
-        startActivity(intent)
-    }
-/*
     fun GetCalendarDate(){
         val cal = Calendar.getInstance()
         day = cal.get(Calendar.DAY_OF_WEEK)
@@ -47,5 +51,5 @@ class Nacimiento : AppCompatActivity(){ //, DatePickerDialog.OnDateSetListener {
         tvNacimiento.text = "" + savedDay + "-" + savedMonth + "-" + savedYear
     }
 
-*/
+
 }

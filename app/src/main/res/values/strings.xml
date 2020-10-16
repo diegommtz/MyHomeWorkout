@@ -6,10 +6,9 @@
     <string name="LogIn">Iniciar Sesión</string>
     <string name="preguntaCuenta">¿Aun no tienes cuenta?</string>
     <string name="crear_cuenta"><u>Crear cuenta</u></string>
-    <string name="gender">Ingresa tu género.</string>
     <string name="hombre">Hombre</string>
     <string name="mujer">Mujer</string>
-    <string name="nacimiento">Ingresa tu fecha de nacimiento.</string>
+
     <string name="entrenamientos">Entrenamientos</string>
     <string name="kilos">Kilos</string>
     <string name="objetivos">Objetivos</string>
@@ -23,6 +22,10 @@
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="perfil">Perfil</string>
     <string name="genero">Género</string>
+    <string name="peso">Peso</string>
+    <string name="altura">Altura</string>
+    <string name="nacimiento">Nacimiento</string>
+
     <string name="estas_a_parte1">¡Estas a </string>
     <string name="estas_a_parte2"> kilos de tu peso ideal!</string>
     <string name="entrenamiento_de_hoy">Entrenamiento de hoy: </string>
@@ -73,4 +76,8 @@
     <string name="txtFocalizacion">FOCALIZACIÓN</string>
     <string name="txtMusculosInv">MÚSCULOS INVOLUCRADOS</string>
 
+    <string name="gender">Ingresa tu género.</string>
+    <string name="pesoTxt">Ingresa tu peso</string>
+    <string name="alturaTxt">Ingresa tu altura</string>
+    <string name="nacimientoTxt">Ingresa tu fecha de nacimiento.</string>
 </resources>
