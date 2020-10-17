@@ -12,11 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="@string/alturaTxt"
+        android:text="@string/fotos"
         android:textColor="#000000"
         android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="@string/fotos_explicacion"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,11 +38,14 @@
         android:scrollbarSize="4dp">
 
         <Button
+            android:id="@+id/pickerFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pickerFoto"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/circular_btn"
             android:text="Elige una foto"
-        />
+            android:textColor="#FFFFFF" />
         
         <ImageView
             android:layout_width="match_parent"

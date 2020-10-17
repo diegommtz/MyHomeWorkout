@@ -62,8 +62,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
+        android:background="@drawable/circular_btn"
         android:onClick="genero"
-        android:text="@string/LogIn" />
+        android:text="@string/LogIn"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView5"
@@ -86,5 +88,8 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesion con FB" />
+        android:background="@color/fb"
+        android:shadowColor="#FFFFFF"
+        android:text="@string/fblog"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

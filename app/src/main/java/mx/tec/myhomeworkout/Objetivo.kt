@@ -10,7 +10,15 @@ class Objetivo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objetivo)
 
-        btnNext.setOnClickListener {
+        btnPerderPeso.setOnClickListener {
+            val intent = Intent(this@Objetivo, Horario::class.java)
+            startActivity(intent)
+        }
+        btnEstarEnForma.setOnClickListener {
+            val intent = Intent(this@Objetivo, Horario::class.java)
+            startActivity(intent)
+        }
+        btnGanarMusculo.setOnClickListener {
             val intent = Intent(this@Objetivo, Horario::class.java)
             startActivity(intent)
         }
