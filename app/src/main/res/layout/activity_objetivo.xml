@@ -20,11 +20,13 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnPerderPeso"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/circular_btn"
         android:shadowColor="#FFFFFF"
-        android:text="@string/perderP" />
+        android:text="@string/perderP"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView13"
@@ -32,13 +34,17 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="@string/tonificar" />
+        android:text="@string/tonificar"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnGanarMusculo"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="@string/ganarM" />
+        android:background="@drawable/circular_btn"
+        android:text="@string/ganarM"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView14"
@@ -46,13 +52,17 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="@string/crecer" />
+        android:text="@string/crecer"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnEstarEnForma"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="@string/estarF" />
+        android:background="@drawable/circular_btn"
+        android:text="@string/estarF"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView15"
@@ -60,6 +70,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:gravity="center"
+        android:text="@string/motivado"
+        android:textColor="#000000"
+        android:textSize="16sp" />
         android:text="@string/motivado" />
 
     <LinearLayout
