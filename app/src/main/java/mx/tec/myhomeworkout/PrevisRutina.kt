@@ -4,11 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_nacimiento.*
-import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import kotlinx.android.synthetic.main.activity_previs_rutina.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterParent
-import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementChild
 import mx.tec.myhomeworkout.elemento.modelo.ElementParent
 
@@ -23,15 +20,15 @@ class PrevisRutina : AppCompatActivity() {
         }
 
         val dataChild1 = listOf(
-            ElementChild("Squats", R.drawable.mujer_plancking, "10 repeticiones"),
-            ElementChild("Plancking", R.drawable.mujer_plancking, "2 min"),
-            ElementChild("Sentadillas", R.drawable.mujer_plancking, "25 repeticiones")
+            ElementChild("Squats", R.drawable.img_mujer_plancking, "10 repeticiones"),
+            ElementChild("Plancking", R.drawable.img_mujer_plancking, "2 min"),
+            ElementChild("Sentadillas", R.drawable.img_mujer_plancking, "25 repeticiones")
         )
 
         val dataChild2 = listOf(
-            ElementChild("Pesas", R.drawable.mujer_plancking, "10 repeticiones"),
-            ElementChild("Abdominales", R.drawable.mujer_plancking, "25 repeticiones"),
-            ElementChild("Abdominales bajas", R.drawable.mujer_plancking, "25 repeticiones")
+            ElementChild("Pesas", R.drawable.img_mujer_plancking, "10 repeticiones"),
+            ElementChild("Abdominales", R.drawable.img_mujer_plancking, "25 repeticiones"),
+            ElementChild("Abdominales bajas", R.drawable.img_mujer_plancking, "25 repeticiones")
         )
 
         val dataParent = listOf(

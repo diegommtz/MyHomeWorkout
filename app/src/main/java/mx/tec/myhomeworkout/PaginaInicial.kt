@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
@@ -21,10 +19,10 @@ class PaginaInicial : AppCompatActivity() {
         tvWelcomeMessage.setText(txt)
 
         val datos = listOf(
-            ElementSimpleExercise(R.drawable.mujer_plancking, "Sentadillas"),
-            ElementSimpleExercise(R.drawable.mujer_plancking, "Abdominales"),
-            ElementSimpleExercise(R.drawable.mujer_plancking, "Jumping jacks"),
-            ElementSimpleExercise(R.drawable.mujer_plancking, "Monster")
+            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Sentadillas"),
+            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Abdominales"),
+            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Jumping jacks"),
+            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Monster")
         )
 
         val adaptador = CustomAdapterSimpleExercise(this@PaginaInicial, R.layout.simple_exercise, datos, 0)
