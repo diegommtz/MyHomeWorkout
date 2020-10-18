@@ -62,7 +62,7 @@
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/peso" />
+            android:text="@string/peso2" />
 
         <TextView
             android:id="@+id/textView23"
