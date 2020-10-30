@@ -12,9 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
+import mx.tec.myhomeworkout.fragments.MarcoEspalda
+import mx.tec.myhomeworkout.fragments.MarcoFrente
+import mx.tec.myhomeworkout.fragments.MarcoPerfil
 import java.lang.Exception
 
 class PrevPhotos : AppCompatActivity() {
@@ -26,6 +30,8 @@ class PrevPhotos : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prev_photos)
 
+        if(savedInstanceState != null) return
+
         pickerFoto.setOnClickListener{
             SelectImage()
         }
@@ -34,6 +40,27 @@ class PrevPhotos : AppCompatActivity() {
             Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
+
+        btnEspalda.setOnClickListener {
+            Toast.makeText(this@PrevPhotos, "ESPALDA", Toast.LENGTH_LONG).show()
+            replaceFragment(MarcoEspalda())
+        }
+        btnFrente.setOnClickListener {
+            Toast.makeText(this@PrevPhotos, "FRENTE", Toast.LENGTH_LONG).show()
+            replaceFragment(MarcoFrente())
+        }
+        btnPerfil.setOnClickListener {
+            Toast.makeText(this@PrevPhotos, "PERFIL", Toast.LENGTH_LONG).show()
+            replaceFragment(MarcoPerfil())
+        }
+    }
+
+    private fun replaceFragment(fragment:Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.marco, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
     }
 
     fun SelectImage()
