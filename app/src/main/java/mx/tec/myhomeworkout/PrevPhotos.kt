@@ -32,6 +32,7 @@ class PrevPhotos : AppCompatActivity() {
     val requestCamera = 1
     var index = 0;
     val imagesTitles = arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
+    val imageList = ArrayList<SlideModel>() // Create image list
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class PrevPhotos : AppCompatActivity() {
 
         //replaceFragment(MarcoFrente(), R.string.foto_frontal)
 
-        val imageList = ArrayList<SlideModel>() // Create image list
         tvFotoHint.setText(imagesTitles[0])
 
         imageList.add(SlideModel(R.drawable.frontal))
@@ -53,11 +53,8 @@ class PrevPhotos : AppCompatActivity() {
         slider.setItemChangeListener(object : ItemChangeListener{
             override fun onItemChanged(position: Int) {
                 index = position;
-                Toast.makeText(this@PrevPhotos, "¡CLICK! ${index}", Toast.LENGTH_SHORT).show()
                 tvFotoHint.setText(imagesTitles[index])
-
             }
-            // imageList[position] = SlideModel(R.drawable.logo, "Foto cambiada")
         })
 
         pickerFoto.setOnClickListener{
@@ -83,13 +80,14 @@ class PrevPhotos : AppCompatActivity() {
         * */
     }
 
+    /*
     private fun replaceFragment(fragment:Fragment, idText: Int){
         tvFotoHint.setText(idText)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         //fragmentTransaction.replace(R.id.marco, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-    }
+    }*/
 
     fun SelectImage()
     {
@@ -122,12 +120,15 @@ class PrevPhotos : AppCompatActivity() {
             if(requestCode == requestCamera){
                 val bundle: Bundle = data?.extras!!
                 val bmp: Bitmap = bundle.get("data") as Bitmap
-                imagen.setImageBitmap(bmp)
+                //imagen.setImageBitmap(bmp)
+                //imageList[index] = SlideModel(bmp, "Foto cambiada")
+
             }
             else if (requestCode == selectFile)
             {
                 val uri = data?.data
-                imagen.setImageURI(uri)
+                imageList[index] = SlideModel(uri.toString())
+                slider.setImageList(imageList)
             }
         }
     }
