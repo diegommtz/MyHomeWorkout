@@ -13,6 +13,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.models.SlideModel
 import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
@@ -32,35 +36,54 @@ class PrevPhotos : AppCompatActivity() {
 
         if(savedInstanceState != null) return
 
+        //replaceFragment(MarcoFrente(), R.string.foto_frontal)
+
+        val imageList = ArrayList<SlideModel>() // Create image list
+
+        imageList.add(SlideModel(R.drawable.frontal, "Foto de frente"))
+        imageList.add(SlideModel(R.drawable.frontal, "Foto de perfil"))
+        imageList.add(SlideModel(R.drawable.frontal, "Foto de espalda", ScaleTypes.CENTER_INSIDE))
+
+        slider.setImageList(imageList)
+
+        slider.setItemClickListener(object : ItemClickListener {
+            override fun onItemSelected(position: Int) {
+                Toast.makeText(this@PrevPhotos, "¡CLICK!", Toast.LENGTH_SHORT).show()
+                imageList[position] = SlideModel(R.drawable.logo, "Foto cambiada")
+                slider.setImageList(imageList)
+            }
+        })
+
         pickerFoto.setOnClickListener{
             SelectImage()
         }
+
         btnNext.setOnClickListener {
             val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
             Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
+        /*
         btnEspalda.setOnClickListener {
-            Toast.makeText(this@PrevPhotos, "ESPALDA", Toast.LENGTH_LONG).show()
-            replaceFragment(MarcoEspalda())
+            replaceFragment(MarcoEspalda(), R.string.foto_espalda)
         }
         btnFrente.setOnClickListener {
-            Toast.makeText(this@PrevPhotos, "FRENTE", Toast.LENGTH_LONG).show()
-            replaceFragment(MarcoFrente())
+            replaceFragment(MarcoFrente(), R.string.foto_frontal)
         }
         btnPerfil.setOnClickListener {
-            Toast.makeText(this@PrevPhotos, "PERFIL", Toast.LENGTH_LONG).show()
-            replaceFragment(MarcoPerfil())
+            replaceFragment(MarcoPerfil(), R.string.foto_perfil)
         }
+        * */
+
     }
 
-    private fun replaceFragment(fragment:Fragment){
+    private fun replaceFragment(fragment:Fragment, idText: Int){
+        tvFotoHint.setText(idText)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.marco, fragment)
+        //fragmentTransaction.replace(R.id.marco, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
     }
 
     fun SelectImage()
