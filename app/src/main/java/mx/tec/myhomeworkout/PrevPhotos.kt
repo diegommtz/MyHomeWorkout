@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import kotlinx.android.synthetic.main.activity_nacimiento.*
@@ -29,6 +30,8 @@ class PrevPhotos : AppCompatActivity() {
 
     val selectFile: Int = 0
     val requestCamera = 1
+    var index = 0;
+    val imagesTitles = arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,19 +42,22 @@ class PrevPhotos : AppCompatActivity() {
         //replaceFragment(MarcoFrente(), R.string.foto_frontal)
 
         val imageList = ArrayList<SlideModel>() // Create image list
+        tvFotoHint.setText(imagesTitles[0])
 
-        imageList.add(SlideModel(R.drawable.frontal, "Foto de frente"))
-        imageList.add(SlideModel(R.drawable.frontal, "Foto de perfil"))
-        imageList.add(SlideModel(R.drawable.frontal, "Foto de espalda", ScaleTypes.CENTER_INSIDE))
+        imageList.add(SlideModel(R.drawable.frontal))
+        imageList.add(SlideModel(R.drawable.frontal))
+        imageList.add(SlideModel(R.drawable.frontal))
 
         slider.setImageList(imageList)
 
-        slider.setItemClickListener(object : ItemClickListener {
-            override fun onItemSelected(position: Int) {
-                Toast.makeText(this@PrevPhotos, "¡CLICK!", Toast.LENGTH_SHORT).show()
-                imageList[position] = SlideModel(R.drawable.logo, "Foto cambiada")
-                slider.setImageList(imageList)
+        slider.setItemChangeListener(object : ItemChangeListener{
+            override fun onItemChanged(position: Int) {
+                index = position;
+                Toast.makeText(this@PrevPhotos, "¡CLICK! ${index}", Toast.LENGTH_SHORT).show()
+                tvFotoHint.setText(imagesTitles[index])
+
             }
+            // imageList[position] = SlideModel(R.drawable.logo, "Foto cambiada")
         })
 
         pickerFoto.setOnClickListener{
@@ -75,7 +81,6 @@ class PrevPhotos : AppCompatActivity() {
             replaceFragment(MarcoPerfil(), R.string.foto_perfil)
         }
         * */
-
     }
 
     private fun replaceFragment(fragment:Fragment, idText: Int){
