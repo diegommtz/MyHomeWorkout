@@ -73,7 +73,6 @@ class HaciendoEjercicio : AppCompatActivity() {
                 //No supe de qué otra forma hacer esto
                 //Con el mismo botón abre la info y sale de la info
                 itera++
-
                 if (itera % 2 != 0) {
                     replaceFragment(InfoFragment())
                 } else {

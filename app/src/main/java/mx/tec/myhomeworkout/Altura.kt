@@ -3,6 +3,7 @@ package mx.tec.myhomeworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.NumberPicker
 import kotlinx.android.synthetic.main.activity_nacimiento.*
 
@@ -21,6 +22,7 @@ class Altura : AppCompatActivity() {
             val intent = Intent(this@Altura, Peso::class.java)
             startActivity(intent)
         }
+
     }
 
 }

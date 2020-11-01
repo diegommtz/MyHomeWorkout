@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
@@ -35,5 +36,29 @@ class PaginaInicial : AppCompatActivity() {
             val intent = Intent(this@PaginaInicial, PrevisRutina::class.java)
             startActivity(intent)
         }
+
+        val btnTrain=findViewById<Button>(R.id.btnTrain)
+        val btnProfile=findViewById<Button>(R.id.btnProfile)
+        val btnProgress=findViewById<Button>(R.id.btnProgress)
+
+
+        btnTrain.setOnClickListener(){
+
+            val intent = Intent(this@PaginaInicial,HaciendoEjercicio::class.java)
+            startActivity(intent)
+
+        }
+        btnProfile.setOnClickListener(){
+
+            val intent = Intent(this@PaginaInicial, ProfileAct::class.java)
+            startActivity(intent)
+
+        }
+        btnProgress.setOnClickListener(){
+            val intent = Intent(this@PaginaInicial, MonitoreaProceso::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }

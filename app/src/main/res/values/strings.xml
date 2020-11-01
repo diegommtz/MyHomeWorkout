@@ -83,4 +83,8 @@
     <string name="alturaTxt">Ingresa tu altura</string>
     <string name="nacimientoTxt">Ingresa tu fecha de nacimiento.</string>
     <string name="fblog">Iniciar con facebook</string>
+    <string name="title_activity_main_menu">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
