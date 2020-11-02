@@ -145,7 +145,6 @@ class HaciendoEjercicio : AppCompatActivity() {
             }
             itera++
         }
-
     }
 
     //Función para cargar varios fragments

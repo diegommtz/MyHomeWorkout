@@ -24,75 +24,90 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button7"
+        <ToggleButton
+            android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/green_slack"
-            android:text="@string/M"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/D"
+            android:textOn="@string/D" />
 
-        <Button
-            android:id="@+id/button6"
+        <ToggleButton
+            android:id="@+id/toggleButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/green_slack"
-            android:text="@string/L"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/L"
+            android:textOn="@string/L" />
 
-        <Button
-            android:id="@+id/button8"
+        <ToggleButton
+            android:id="@+id/toggleButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/yellow_slack"
-            android:text="@string/M"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/M"
+            android:textOn="@string/M" />
 
-        <Button
-            android:id="@+id/button9"
+        <ToggleButton
+            android:id="@+id/toggleButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/green_slack"
-            android:text="@string/J"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/M"
+            android:textOn="@string/M" />
 
-        <Button
-            android:id="@+id/button10"
+        <ToggleButton
+            android:id="@+id/toggleButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/yellow_slack"
-            android:text="@string/V"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/J"
+            android:textOn="@string/J" />
 
-        <Button
-            android:id="@+id/button11"
+        <ToggleButton
+            android:id="@+id/toggleButton6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/yellow_slack"
-            android:text="@string/S"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/V"
+            android:textOn="@string/V" />
 
-        <Button
-            android:id="@+id/button12"
+        <ToggleButton
+            android:id="@+id/toggleButton7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/green_slack"
-            android:text="@string/D"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/my_toggle_btn"
+            android:text="ToggleButton"
+            android:textColor="#FFFFFF"
+            android:textOff="@string/S"
+            android:textOn="@string/S" />
+
     </LinearLayout>
 
     <TextView
