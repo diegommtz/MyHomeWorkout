@@ -8,21 +8,11 @@
     tools:context=".PrevPhotos">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/fotos"
-        android:textColor="#000000"
-        android:textSize="24sp" />
-
-    <TextView
         android:id="@+id/textView29"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
         android:gravity="center"
@@ -33,25 +23,89 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
         android:scrollbarSize="4dp">
+
+        <TextView
+            android:id="@+id/tvFotoHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/fotos"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/slider"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            android:background="#E4E1E1"></com.denzcoskun.imageslider.ImageSlider>
+
+        <!--
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center">
+
+            <LinearLayout
+                android:id="@+id/marco"
+                android:layout_width="200dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
+                android:background="#DFDCDC"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/botones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnFrente"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/circular_btn_pics" />
+
+                <Button
+                    android:id="@+id/btnEspalda"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/circular_btn_pics" />
+
+                <Button
+                    android:id="@+id/btnPerfil"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/circular_btn_pics" />
+
+            </LinearLayout>
+
+        </FrameLayout>-->
 
         <Button
             android:id="@+id/pickerFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/circular_btn"
             android:text="Elige una foto"
             android:textColor="#FFFFFF" />
-        
+
         <ImageView
+            android:id="@+id/imagen"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/imagen"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
 
         <!--NumberPicker
             android:id="@+id/pickerAltura"
