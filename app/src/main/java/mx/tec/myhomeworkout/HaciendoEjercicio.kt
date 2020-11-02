@@ -1,23 +1,13 @@
 package mx.tec.myhomeworkout
 
 
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.SystemClock
-import android.util.Log
 import android.view.ViewGroup
-import android.webkit.URLUtil
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.MediaController
-import android.widget.VideoView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
-import kotlinx.android.synthetic.main.activity_profile.*
+import mx.tec.myhomeworkout.fragments.VideoFragment
 import java.util.*
 
 class HaciendoEjercicio : AppCompatActivity() {

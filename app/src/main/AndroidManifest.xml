@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.tec.myhomeworkout">
 
-    <uses-permission android:name="android.permission.camera2" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.camera2"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -16,7 +17,11 @@
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu"></activity>
-        <activity android:name=".HaciendoEjercicio" />
+        <activity android:name=".HaciendoEjercicio"
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait"></activity>
+
+
         <activity
             android:name=".PrevisRutina"
             android:label="@string/Inicio"
@@ -25,21 +30,14 @@
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
-        <activity
-            android:name=".Horario"
-            android:screenOrientation="portrait"
-            android:theme="@style/noToolBar" />
-        <activity
-            android:name=".Objetivo"
-            android:screenOrientation="portrait"
-            android:theme="@style/noToolBar" />
+        <activity android:name=".Horario" android:theme="@style/noToolBar" android:screenOrientation="portrait"/>
+        <activity android:name=".Objetivo" android:theme="@style/noToolBar" android:screenOrientation="portrait"/>
+
         <activity
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar" />
-        <activity
-            android:name=".PrevPhotos"
-            android:theme="@style/noToolBar" />
+            android:theme="@style/noToolBar"/>
+        <activity android:name=".PrevPhotos" android:theme="@style/noToolBar"></activity>
         <activity
             android:name=".Peso"
             android:label="@string/altura"
@@ -66,8 +64,7 @@
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar" />
-
+            android:theme="@style/noToolBar"/>
 
         <activity
             android:name=".MainActivity"

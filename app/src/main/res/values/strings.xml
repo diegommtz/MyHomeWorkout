@@ -53,6 +53,9 @@
     <string name="peso2">Peso: </string>
     <string name="graficas">Gráficas</string>
     <string name="fotos">Fotos</string>
+    <string name="foto_frontal">Foto de frente</string>
+    <string name="foto_espalda">Foto de espalda</string>
+    <string name="foto_perfil">Foto de lado</string>
     <string name="fotos_explicacion">Estas fotos te ayudaran a conocer tu avance a lo largo de tus entrenamientos.</string>
     <string name="monitorea">Monitorea tu progreso</string>
     <string name="selecciona">Selecciona un intervalo de tiempo para visualizar tu información.</string>
