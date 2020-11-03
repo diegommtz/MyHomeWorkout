@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.icu.number.Scale
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,7 +33,7 @@ class PrevPhotos : AppCompatActivity() {
     val requestCamera = 1
     var index = 0;
     val imagesTitles = arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
-    val imageList = ArrayList<SlideModel>() // Create image list
+    val imageList = ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +45,9 @@ class PrevPhotos : AppCompatActivity() {
 
         tvFotoHint.setText(imagesTitles[0])
 
-        imageList.add(SlideModel(R.drawable.frontal))
-        imageList.add(SlideModel(R.drawable.frontal))
-        imageList.add(SlideModel(R.drawable.frontal))
+        imageList.add(SlideModel(R.drawable.img_frente, ScaleTypes.CENTER_CROP))
+        imageList.add(SlideModel(R.drawable.img_espalda, ScaleTypes.CENTER_CROP))
+        imageList.add(SlideModel(R.drawable.img_perfil, ScaleTypes.CENTER_CROP))
 
         slider.setImageList(imageList)
 

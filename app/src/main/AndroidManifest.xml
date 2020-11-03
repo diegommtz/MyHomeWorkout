@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainMenu"
-            android:label="@string/title_activity_main_menu"></activity>
+            android:label="@string/title_activity_main_menu">
+        </activity>
         <activity android:name=".HaciendoEjercicio"
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait"></activity>
@@ -26,7 +27,9 @@
             android:name=".PrevisRutina"
             android:label="@string/Inicio"
             android:parentActivityName=".PaginaInicial"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
@@ -37,7 +40,8 @@
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar"/>
-        <activity android:name=".PrevPhotos" android:theme="@style/noToolBar"></activity>
+        <activity android:name=".PrevPhotos" android:theme="@style/noToolBar">
+        </activity>
         <activity
             android:name=".Peso"
             android:label="@string/altura"
@@ -51,7 +55,13 @@
         <activity
             android:name=".ProfileAct"
             android:label="@string/perfil"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Nacimiento"
             android:label="@string/genero"
@@ -71,11 +81,6 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/splashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
