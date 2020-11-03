@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.tec.myhomeworkout">
 
-    <uses-permission android:name="android.permission.camera2"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.camera2" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,15 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PosRutina"></activity>
         <activity android:name=".HaciendoEjercicio" />
-
-
         <activity
             android:name=".PrevisRutina"
             android:label="@string/Inicio"
             android:parentActivityName=".PaginaInicial"
             android:screenOrientation="portrait" />
-
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
@@ -33,35 +31,32 @@
             android:name=".Objetivo"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar" />
-
         <activity
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar" />
         <activity
             android:name=".PrevPhotos"
-            android:theme="@style/noToolBar"></activity>
+            android:theme="@style/noToolBar" />
         <activity
             android:name=".Peso"
             android:label="@string/altura"
             android:parentActivityName=".Altura"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Altura"
             android:label="@string/nacimiento"
             android:parentActivityName=".Nacimiento"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ProfileAct"
             android:label="@string/perfil"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Nacimiento"
             android:label="@string/genero"
             android:parentActivityName=".Genero"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Genero"
             android:label="@string/app_name_space"
@@ -69,11 +64,7 @@
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar">
-
-
-        </activity>
-
+            android:theme="@style/noToolBar"></activity>
         <activity
             android:name=".MainActivity"
             android:label=""
@@ -86,4 +77,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
