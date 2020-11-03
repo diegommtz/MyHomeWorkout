@@ -12,21 +12,21 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="@string/meta2"
         android:textColor="#000000"
         android:textSize="24sp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnPerderPeso"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/circular_btn"
-        android:shadowColor="#FFFFFF"
-        android:text="@string/perderP"
-        android:textColor="#FFFFFF" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_btn_green_toggle"
+        android:textColor="#FFFFFF"
+        android:textOff="@string/perderP"
+        android:textOn="@string/perderP" />
 
     <TextView
         android:id="@+id/textView13"
@@ -38,13 +38,14 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnGanarMusculo"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/circular_btn"
-        android:text="@string/ganarM"
-        android:textColor="#FFFFFF" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_btn_green_toggle"
+        android:textColor="#FFFFFF"
+        android:textOff="@string/ganarM"
+        android:textOn="@string/ganarM" />
 
     <TextView
         android:id="@+id/textView14"
@@ -56,24 +57,35 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/btnEstarEnForma"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/circular_btn"
-        android:text="@string/estarF"
-        android:textColor="#FFFFFF" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/circular_btn_green_toggle"
+        android:textColor="#FFFFFF"
+        android:textOff="@string/estarF"
+        android:textOn="@string/estarF" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:text="@string/motivado"
         android:textColor="#000000"
         android:textSize="16sp" />
         android:text="@string/motivado" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:text="@string/descripcion_2_pasos"
+        android:textColor="#000000"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

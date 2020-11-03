@@ -1,31 +1,18 @@
 package mx.tec.myhomeworkout
 
-import android.app.ActionBar
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.icu.number.Scale
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
-import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
-import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
-import mx.tec.myhomeworkout.fragments.MarcoEspalda
-import mx.tec.myhomeworkout.fragments.MarcoFrente
-import mx.tec.myhomeworkout.fragments.MarcoPerfil
-import java.lang.Exception
 
 class PrevPhotos : AppCompatActivity() {
 
@@ -43,7 +30,7 @@ class PrevPhotos : AppCompatActivity() {
 
         //replaceFragment(MarcoFrente(), R.string.foto_frontal)
 
-        tvFotoHint.setText(imagesTitles[0])
+        tvAltura.setText(imagesTitles[0])
 
         imageList.add(SlideModel(R.drawable.img_frente, ScaleTypes.CENTER_CROP))
         imageList.add(SlideModel(R.drawable.img_espalda, ScaleTypes.CENTER_CROP))
@@ -54,7 +41,7 @@ class PrevPhotos : AppCompatActivity() {
         slider.setItemChangeListener(object : ItemChangeListener{
             override fun onItemChanged(position: Int) {
                 index = position;
-                tvFotoHint.setText(imagesTitles[index])
+                tvAltura.setText(imagesTitles[index])
             }
         })
 
@@ -63,8 +50,10 @@ class PrevPhotos : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+            val intent = Intent(this@PrevPhotos, MainMenu::class.java)
             Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 

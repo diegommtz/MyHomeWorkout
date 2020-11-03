@@ -59,6 +59,8 @@
     <string name="fotos_explicacion">Estas fotos te ayudaran a conocer tu avance a lo largo de tus entrenamientos.</string>
     <string name="monitorea">Monitorea tu progreso</string>
     <string name="selecciona">Selecciona un intervalo de tiempo para visualizar tu información.</string>
+    <string name="previs_rutina_titulo">Rutina de hoy</string>
+
 
     <string name="tvDay">Día</string>
     <string name="tvTiempoEstimado">Tiempo Estimado</string>
@@ -88,6 +90,15 @@
     <string name="fblog">Iniciar con facebook</string>
     <string name="title_activity_main_menu">MainActivity</string>
     <string name="title_home">Home</string>
+    <string name="title_meta">Meta</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="title_paginaInicial">Página Inicial</string>
+    <string name="title_ProfileAct">Profile</string>
+    <string name="title_MonitoreoProgreso">Progreso</string>
+    <string name="descripcion_4_pasos">Esta información nos ayuda a saber más de ti y calcular con mayor exactitud tu progreso.</string>
+    <string name="descripcion_2_pasos">Esta información nos ayuda a acondicionar las rutinas de acuerdo a tu meta y tiempo.</string>
+
+
 </resources>

@@ -3,6 +3,7 @@ package mx.tec.myhomeworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.NumberPicker
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_peso.*
@@ -24,6 +25,18 @@ class Peso : AppCompatActivity() {
         btnNext.setOnClickListener{
             val intent = Intent(this@Peso, Objetivo::class.java)
             startActivity(intent)
+        }
+
+        // SET VISIBILITY ELEMENTS
+        val invisible = intent.getStringExtra("invisible")
+        if (invisible == "true"){
+            one.visibility = View.INVISIBLE
+            two.visibility = View.INVISIBLE
+            three.visibility = View.INVISIBLE
+            four.visibility = View.INVISIBLE
+            tvDescripcion.visibility = View.INVISIBLE
+            btnNext.visibility = View.INVISIBLE
+
         }
     }
 }

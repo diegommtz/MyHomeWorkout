@@ -41,7 +41,6 @@ class Nacimiento : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         savedYear = year
         GetCalendarDate()
 
-        tvNacimiento.text = "" + savedDay + "-" + savedMonth + "-" + savedYear
     }
 
     fun altura(view: View){

@@ -35,7 +35,7 @@
                 android:background="#803AAE84" />
 
             <ImageView
-                android:id="@+id/tree"
+                android:id="@+id/three"
                 android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_marginLeft="3dp"
@@ -56,7 +56,7 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/tvFotoHint"
+        android:id="@+id/tvAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -79,25 +79,27 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btnHombre"
+                android:id="@+id/imgHombre"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/round_corners_btn"
+                android:background="#00FFFFFF"
+                android:clickable="false"
                 android:fadingEdgeLength="10dp"
                 android:hapticFeedbackEnabled="false"
-                android:onClick="nacimiento"
                 android:padding="20dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/marte" />
 
-            <TextView
-                android:id="@+id/tvHombre"
+            <ToggleButton
+                android:id="@+id/btnHombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/hombre"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:background="@drawable/circular_btn_green_toggle"
+                android:shadowColor="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:textOff="@string/hombre"
+                android:textOn="@string/hombre" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -107,25 +109,61 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btnMujer"
+                android:id="@+id/imgMujer"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/round_corners_btn"
+                android:background="#00FFFFFF"
+                android:clickable="false"
                 android:hapticFeedbackEnabled="false"
-                android:onClick="nacimiento"
                 android:padding="20dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/venus" />
 
-            <TextView
-                android:id="@+id/tvMujer"
+            <ToggleButton
+                android:id="@+id/btnMujer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/mujer"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:background="@drawable/circular_btn_green_toggle"
+                android:selectAllOnFocus="false"
+                android:shadowColor="#FFFFFF"
+                android:text="ToggleButton"
+                android:textColor="#FFFFFF"
+                android:textOff="@string/mujer"
+                android:textOn="@string/mujer" />
+
         </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:text="@string/descripcion_4_pasos"
+        android:textColor="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/circular_btn"
+            android:onClick="nacimiento"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/flecha_derecha" />
 
     </LinearLayout>
 

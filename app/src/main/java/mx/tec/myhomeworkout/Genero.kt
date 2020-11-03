@@ -4,12 +4,27 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_genero.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
 class Genero : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_genero)
+        // INIT TOGGLE BUTTONS
+        btnMujer.setChecked(true)
+        btnHombre.setChecked(false)
+
+        // ON CLICK
+        btnMujer.setOnClickListener {
+            btnMujer.setChecked(true)
+            btnHombre.setChecked(false)
+        }
+        btnHombre.setOnClickListener {
+            btnMujer.setChecked(false)
+            btnHombre.setChecked(true)
+        }
     }
 
     fun nacimiento(view: View){
