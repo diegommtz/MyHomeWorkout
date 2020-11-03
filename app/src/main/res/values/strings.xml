@@ -99,6 +99,6 @@
     <string name="title_MonitoreoProgreso">Progreso</string>
     <string name="descripcion_4_pasos">Esta información nos ayuda a saber más de ti y calcular con mayor exactitud tu progreso.</string>
     <string name="descripcion_2_pasos">Esta información nos ayuda a acondicionar las rutinas de acuerdo a tu meta y tiempo.</string>
-
-
+    
+    <string name="felicidades">FELICIDADES, terminaste tu entrenamiento!</string>
 </resources>

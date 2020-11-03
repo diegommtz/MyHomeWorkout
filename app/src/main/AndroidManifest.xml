@@ -3,9 +3,9 @@
     package="mx.tec.myhomeworkout">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.camera2"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.camera2" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,13 +23,12 @@
         android:screenOrientation="portrait"></activity>
 
 
+        <activity android:name=".PosRutina"></activity>
         <activity
             android:name=".PrevisRutina"
             android:label="@string/previs_rutina_titulo"
             android:parentActivityName=".PaginaInicial"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" ></activity>
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
@@ -50,6 +49,8 @@
             android:label="@string/fotos"
             android:parentActivityName=".Horario">
         </activity>
+
+
         <activity
             android:name=".Peso"
             android:label="@string/peso"
@@ -63,8 +64,7 @@
         <activity
             android:name=".ProfileAct"
             android:label="@string/perfil"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" ></activity>
         <activity
             android:name=".Nacimiento"
             android:label="@string/nacimiento"
@@ -77,18 +77,16 @@
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:theme="@style/noToolBar"/>
         <activity
             android:name=".MainActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/splashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

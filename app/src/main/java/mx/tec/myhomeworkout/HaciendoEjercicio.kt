@@ -5,6 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.ViewGroup
+import android.net.Uri
+import android.os.Build
+import android.view.View
+import android.webkit.URLUtil
+import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,19 +21,24 @@ import mx.tec.myhomeworkout.fragments.VideoFragment
 import java.util.*
 
 class HaciendoEjercicio : AppCompatActivity() {
-    private val VIDEO_NAME = "cuphead"
-    var itera=0
+    val videoNames = arrayOf("rutina1", "rutina2", "rutina3", "rutina4")
+    var itera = 0
+    var i = 0
+    var play = false
+    var millisInFuture: Long = 15000 //tiempo descendente
+    var countDownInterval: Long = 1000 //cada segundo
 
     //contador
     private var isPaused = false
     private var isCancelled = false
-    private var resumeFromMillis:Long = 0
+    private var resumeFromMillis: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_haciendo_ejercicio)
 
-        val dayArray = resources.getStringArray(R.array.dayArray)//tomamos los valores que tenemos en los recursos
+        val dayArray =
+            resources.getStringArray(R.array.dayArray)//tomamos los valores que tenemos en los recursos
         //val btnQuestion=findViewById<Button>(R.id.btnQuestion)
 
 
@@ -39,14 +49,8 @@ class HaciendoEjercicio : AppCompatActivity() {
         val day = calendar[Calendar.DATE]
 
         val dayOfWeek: Int = calendar.get(Calendar.DAY_OF_WEEK)
-        val dayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
-        val dayOfYear: Int = calendar.get(Calendar.DAY_OF_YEAR)
-        var todayIs:String=""
+        var todayIs: String = ""
 
-        //INFO OBTENIDA DE:
-        //https://cursokotlin.com/capitulo-22-fragments-en-kotlin/
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
         if (findViewById<ViewGroup>(R.id.layInfo) != null) {
 
             // However, if we're being restored from a previous state,
@@ -56,24 +60,11 @@ class HaciendoEjercicio : AppCompatActivity() {
                 return;
             }
 
-            val fragmentManager = supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            //Para Init Fragments
-            fragmentTransaction.add(R.id.layInfo, VideoFragment())
-            fragmentTransaction.commit()
-
             //al hacer clic abre un cuadro de diálogo con 3 nuevos botones
             btnQuestion.setOnClickListener {
                 //No supe de qué otra forma hacer esto
                 //Con el mismo botón abre la info y sale de la info
-                itera++
-                if (itera % 2 != 0) {
-                    replaceFragment(InfoFragment())
-                } else {
-                    replaceFragment(VideoFragment())
-                }
-
+                replaceFragment(InfoFragment())
             }
 
             //Depende el "dayOfWeek" se asigna un día
@@ -98,40 +89,26 @@ class HaciendoEjercicio : AppCompatActivity() {
             //txtTiempoFaltante.setText("29")
         }
 
-        /*
-        var time=20.toLong()
-        val timer = object: CountDownTimer(time*1000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                txtTiempoFaltante.setText(time--.toString())
-            }
-
-            override fun onFinish() {txtTiempoFaltante.setText("time out")}
-        }
-        timer.start()
-         */
-
         //COUNTDOWN con boton pausa:
         //https://android--code.blogspot.com/2018/04/android-kotlin-countdowntimer-start.html
-        val millisInFuture:Long = 15000 //tiempo descendente
-        val countDownInterval:Long = 1000 //cada segundo
+
 
         //Con un mismo botón: inicio, pause, resumo
-        btnPause.setOnClickListener{
-            if(itera==0){// Start the timer
+        btnPause.setOnClickListener {
+            if (itera == 0) {// Start the timer
                 timer(millisInFuture, countDownInterval).start()
                 //it.isEnabled = false
                 btnPause.setImageResource(R.drawable.pause)
                 isCancelled = false
-                isPaused = false}
-            else if(itera%2!=0) {
+                isPaused = false
+            } else if (itera % 2 != 0) {
                 isPaused = true
                 isCancelled = false
                 btnPause.setImageResource(R.drawable.play)
                 //it.isEnabled = false
-            }
-            else{
+            } else {
                 // Resume the timer
-                timer(resumeFromMillis,countDownInterval).start()
+                timer(resumeFromMillis, countDownInterval).start()
                 isPaused = false
                 isCancelled = false
                 btnPause.setImageResource(R.drawable.pause)
@@ -140,49 +117,106 @@ class HaciendoEjercicio : AppCompatActivity() {
             itera++
         }
 
+        val controller = MediaController(this)
+        controller.setMediaPlayer(videoView)
+        videoView.setMediaController(controller)
     }
 
     //Función para cargar varios fragments
     //Recibe: Fragment
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.layInfo, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 
-    private fun replaceContenidoFragment(fragment: Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.layContenido, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+    // Method to configure and return an instance of CountDownTimer object
+    private fun timer(millisInFuture: Long, countDownInterval: Long): CountDownTimer {
+        var countDownTimer: CountDownTimer
+        countDownTimer =
+            return object : CountDownTimer(millisInFuture, countDownInterval) {
+                override fun onTick(millisUntilFinished: Long) {
+                    //val timeRemaining = "Tiempo Faltante\n${millisUntilFinished/1000}"
+                    val timeRemaining = "${millisUntilFinished / 1000} Seg"
+
+                    if (isPaused) {
+                        //txtTiempoFaltante.text = "${txtTiempoFaltante.text}\nPausa"
+                        txtTiempoFaltante.text = "${txtTiempoFaltante.text}"
+                        // To ensure start timer from paused time
+                        resumeFromMillis = millisUntilFinished
+                        cancel()
+                    } else {
+                        txtTiempoFaltante.text = timeRemaining
+                    }
+                }
+
+                override fun onFinish() {
+                    txtTiempoFaltante.text = "Done"
+                    //replaceContenidoFragment(InfoFragment())
+                }
+            }
+
     }
 
-    // Method to configure and return an instance of CountDownTimer object
-    private fun timer(millisInFuture:Long,countDownInterval:Long):CountDownTimer{
-        return object: CountDownTimer(millisInFuture,countDownInterval){
-            override fun onTick(millisUntilFinished: Long){
-                //val timeRemaining = "Tiempo Faltante\n${millisUntilFinished/1000}"
-                val timeRemaining = "${millisUntilFinished/1000} Seg"
+    private fun getURI(videoname: String): Uri {
+        if (URLUtil.isValidUrl(videoname)) {
+            //  an external URL
+            return Uri.parse(videoname);
+        } else { //  a raw resource
+            return Uri.parse(
+                "android.resource://" + getPackageName() +
+                        "/raw/" + videoname
+            );
+        }
+    }
 
-                if (isPaused){
-                    //txtTiempoFaltante.text = "${txtTiempoFaltante.text}\nPausa"
-                    txtTiempoFaltante.text = "${txtTiempoFaltante.text}"
-                    // To ensure start timer from paused time
-                    resumeFromMillis = millisUntilFinished
-                    cancel()
-                }
-                else{
-                    txtTiempoFaltante.text = timeRemaining
-                }
-            }
-
-            override fun onFinish() {
-                txtTiempoFaltante.text = "Done"
-                //replaceContenidoFragment(InfoFragment())
-            }
+    fun changeVideo(view: View) {
+        if (i + 1 >= videoNames.size) {
+            val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
+            startActivity(intent)
+        } else {
+            i++
+            initPlayer()
         }
 
+    }
+
+    fun changeVideoBack(view: View) {
+        if (i - 1 >= 0) {
+            i--
+            initPlayer()
+
+        }
+    }
+
+    private fun initPlayer() {
+        var videoUri: Uri = getURI(videoNames[i])
+        videoView.setVideoURI(videoUri)
+        videoView.setMediaController(null)
+        videoView.setOnPreparedListener { mp -> mp.isLooping = true }
+        videoView.start()
+    }
+
+    private fun releasePlayer() {
+        videoView.stopPlayback()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        releasePlayer()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initPlayer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            videoView.pause()
+        }
     }
 
 }
