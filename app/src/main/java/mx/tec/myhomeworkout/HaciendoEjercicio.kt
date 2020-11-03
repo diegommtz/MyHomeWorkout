@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
 import mx.tec.myhomeworkout.fragments.MonitoreoProgresoGraficasFragment
 import mx.tec.myhomeworkout.fragments.PaginaInicialFragment
 import mx.tec.myhomeworkout.fragments.ProfileActFragment
-import mx.tec.myhomeworkout.fragments.VideoFragment
 import java.util.*
 
 class HaciendoEjercicio : AppCompatActivity() {
