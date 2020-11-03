@@ -1,12 +1,17 @@
 package mx.tec.myhomeworkout
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
+import mx.tec.myhomeworkout.fragments.MonitoreoProgresoGraficasFragment
+import mx.tec.myhomeworkout.fragments.PaginaInicialFragment
+import mx.tec.myhomeworkout.fragments.ProfileActFragment
 import mx.tec.myhomeworkout.fragments.VideoFragment
 import java.util.*
 

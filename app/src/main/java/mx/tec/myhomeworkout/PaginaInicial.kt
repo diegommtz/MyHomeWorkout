@@ -22,6 +22,11 @@ class PaginaInicial : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagina_inicial)
 
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
+        //bottomNavigation.setSelectedItemId(R.id.home)
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
+
+
         val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
         tvWelcomeMessage.setText(txt)
 
@@ -43,7 +48,32 @@ class PaginaInicial : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
 
+    private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_profileAct -> {
+                val intent = Intent(this@PaginaInicial, ProfileAct::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                //        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                //finish()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_monitoreoProgresoGraficas -> {
+                val intent = Intent(this@PaginaInicial, MonitoreaProgresoGraficas::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        //Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_paginaInicial -> {
+
+                return@OnNavigationItemSelectedListener false
+            }
+        }
+        false
 
     }
 }
