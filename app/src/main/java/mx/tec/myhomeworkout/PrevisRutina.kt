@@ -1,12 +1,9 @@
 package mx.tec.myhomeworkout
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_previs_rutina.*
@@ -14,10 +11,12 @@ import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterParent
 import mx.tec.myhomeworkout.elemento.modelo.ElementChild
 import mx.tec.myhomeworkout.elemento.modelo.ElementParent
 
+
 class PrevisRutina : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_previs_rutina)
+
 
         comenzarRutina.setOnClickListener {
             val intent = Intent(this@PrevisRutina, HaciendoEjercicio::class.java)
@@ -46,6 +45,8 @@ class PrevisRutina : AppCompatActivity() {
         rvParent.layoutManager = LinearLayoutManager(this@PrevisRutina, LinearLayoutManager.VERTICAL, false)
 
         rvParent.adapter = adaptador
-
     }
+
+
+
 }

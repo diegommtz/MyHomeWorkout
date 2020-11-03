@@ -11,6 +11,7 @@
     tools:context=".PrevisRutina">
 
     <TextView
+
         android:id="@+id/tvDia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -65,10 +66,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="-80dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="10dp"
         android:gravity="bottom">
-
-
 
 
         <Button
@@ -78,9 +77,6 @@
             android:background="@drawable/circular_btn"
             android:text="@string/comenzar"
             android:textColor="#FFFFFF" />
-
-
-
 
 
     </RelativeLayout>

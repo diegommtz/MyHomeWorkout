@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:color="@color/white" android:state_checked="true"
-            android:title="TODO" />
-        <item android:color="@color/gray" android:state_checked="false"
-            android:title="TODO" />
-    </selector>
+
     <item
-        android:id="@+id/navigation_monitoreoProgresoGraficas"
+        android:id="@+id/navigation_monitoreoProgreso"
         android:icon="@drawable/grafico_circular"
         android:title="@string/title_MonitoreoProgreso" />
     <item
         android:id="@+id/navigation_paginaInicial"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/profile_jump"
         android:title="@string/title_paginaInicial" />
     <item
-        android:id="@+id/navigation_profileAct"
+        android:id="@+id/navigation_profileActivity"
         android:icon="@drawable/profile_workout"
         android:title="@string/title_ProfileAct" />
-
 </menu>
