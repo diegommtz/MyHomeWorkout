@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainMenu"
-            android:label="@string/title_activity_main_menu"></activity>
+            android:label="@string/title_activity_main_menu">
+
+
+        </activity>
         <activity android:name=".HaciendoEjercicio"
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait"></activity>
@@ -71,6 +74,7 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/splashTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

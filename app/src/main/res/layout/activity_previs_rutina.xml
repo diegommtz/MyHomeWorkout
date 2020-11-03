@@ -68,6 +68,9 @@
         android:layout_marginBottom="3dp"
         android:gravity="bottom">
 
+
+
+
         <Button
             android:id="@+id/comenzarRutina"
             android:layout_width="fill_parent"
@@ -75,6 +78,10 @@
             android:background="@drawable/circular_btn"
             android:text="@string/comenzar"
             android:textColor="#FFFFFF" />
+
+
+
+
 
     </RelativeLayout>
 

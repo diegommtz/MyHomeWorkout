@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_paginaInicial">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -22,4 +22,16 @@
         android:name="mx.tec.myhomeworkout.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_paginaInicial"
+        android:name="mx.tec.myhomeworkout.fragments.PaginaInicialFragment"
+        android:label="PaginaInicialFragment" />
+    <fragment
+        android:id="@+id/navigation_profileAct"
+        android:name="mx.tec.myhomeworkout.fragments.ProfileActFragment"
+        android:label="ProfileActFragment" />
+    <fragment
+        android:id="@+id/navigation_monitoreoProgresoGraficas"
+        android:name="mx.tec.myhomeworkout.fragments.MonitoreoProgresoGraficasFragment"
+        android:label="MonitoreoProgresoGraficasFragment" />
 </navigation>

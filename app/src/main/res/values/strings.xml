@@ -90,4 +90,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="title_paginaInicial">Página Inicial</string>
+    <string name="title_ProfileAct">Profile</string>
+    <string name="title_MonitoreoProgreso">Progreso</string>
+
+
 </resources>

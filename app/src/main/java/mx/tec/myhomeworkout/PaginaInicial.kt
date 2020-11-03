@@ -5,10 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
+
 
 class PaginaInicial : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
@@ -37,27 +43,6 @@ class PaginaInicial : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnTrain=findViewById<Button>(R.id.btnTrain)
-        val btnProfile=findViewById<Button>(R.id.btnProfile)
-        val btnProgress=findViewById<Button>(R.id.btnProgress)
-
-
-        btnTrain.setOnClickListener(){
-
-            val intent = Intent(this@PaginaInicial,HaciendoEjercicio::class.java)
-            startActivity(intent)
-
-        }
-        btnProfile.setOnClickListener(){
-
-            val intent = Intent(this@PaginaInicial, ProfileAct::class.java)
-            startActivity(intent)
-
-        }
-        btnProgress.setOnClickListener(){
-            val intent = Intent(this@PaginaInicial, MonitoreaProceso::class.java)
-            startActivity(intent)
-        }
 
 
     }

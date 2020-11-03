@@ -39,7 +39,7 @@
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/slider"
             android:layout_width="200dp"
-            android:layout_height="350dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:background="#E4E1E1"></com.denzcoskun.imageslider.ImageSlider>
 

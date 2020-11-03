@@ -16,29 +16,5 @@ class ProfileAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-
-        val btnTrain=findViewById<Button>(R.id.btnTrain)
-        val btnProfile=findViewById<Button>(R.id.btnProfile)
-        val btnProgress=findViewById<Button>(R.id.btnProgress)
-
-        btnTrain.setOnClickListener {
-
-            val intent = Intent(this@ProfileAct,HaciendoEjercicio::class.java)
-            startActivity(intent)
-
-        }
-
-        btnProfile.setOnClickListener{
-
-            val intent = Intent(this@ProfileAct, ProfileAct::class.java)
-            startActivity(intent)
-
-        }
-
-        btnProgress.setOnClickListener{
-            val intent = Intent(this@ProfileAct, MonitoreaProceso::class.java)
-            startActivity(intent)
-        }
-
     }
 }
