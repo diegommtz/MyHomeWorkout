@@ -12,7 +12,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
+import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterEntrenador
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
+import mx.tec.myhomeworkout.elemento.modelo.ElementEntrenador
 import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
 
 
@@ -37,11 +39,20 @@ class PaginaInicial : AppCompatActivity() {
             ElementSimpleExercise(R.drawable.img_mujer_plancking, "Monster")
         )
 
+        val entrenadores = listOf(
+            ElementEntrenador(R.drawable.img_mujer_plancking, "Angie"),
+            ElementEntrenador(R.drawable.img_mujer_plancking, "Diego"),
+            ElementEntrenador(R.drawable.img_mujer_plancking, "Fer"),
+            ElementEntrenador(R.drawable.img_mujer_plancking, "Nava")
+        )
+
         val adaptador = CustomAdapterSimpleExercise(this@PaginaInicial, R.layout.simple_exercise, datos, 0)
-
         rvLista.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
-
         rvLista.adapter = adaptador
+
+        val adaptador_entrenador = CustomAdapterEntrenador(this@PaginaInicial, R.layout.layout_entrenadores, entrenadores, 0)
+        rvLista_entrenadores.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
+        rvLista_entrenadores.adapter = adaptador_entrenador
 
         btnPrevis.setOnClickListener {
             val intent = Intent(this@PaginaInicial, PrevisRutina::class.java)

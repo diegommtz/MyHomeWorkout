@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="20dp"
     tools:context=".PaginaInicial">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -24,12 +23,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:gravity="center"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
                 android:singleLine="false"
                 android:text="¡Estas a 9 kilos de tu peso ideal!"
                 android:textColor="#000000"
-                android:textSize="36sp" />
+                android:textSize="24dp"
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -39,6 +41,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scaleType="centerCrop"
+                android:visibility="visible"
                 app:srcCompat="@drawable/img_mujer_plancking" />
 
             <TextView
@@ -50,7 +53,8 @@
                 android:paddingRight="20dp"
                 android:text="@string/entrenamiento_de_hoy"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/btnPrevis"
@@ -62,7 +66,8 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:text="@string/ver_entrenamiento"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:visibility="visible" />
 
             <View
                 android:id="@+id/divider4"
@@ -72,45 +77,71 @@
                 android:layout_marginBottom="10dp"
                 android:background="?android:attr/listDivider"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp" />
+                android:paddingRight="20dp"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:text="@string/mas_ejercicios"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvLista"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="horizontal" >
+                android:scrollbars="horizontal"
+                android:visibility="visible">
 
             </androidx.recyclerview.widget.RecyclerView>
 
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="?android:attr/listDivider"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:visibility="visible" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/nav_view"
+            <TextView
+                android:id="@+id/textView31"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
-                android:background="?android:attr/windowBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:menu="@menu/bottom_nav_menu" />
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/entrenadores"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLista_entrenadores"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
-
-
-
     </ScrollView>
 
-</LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>
