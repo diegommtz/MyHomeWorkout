@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/logo_bg"
     android:orientation="vertical"
     android:padding="25dp"
-    tools:context=".LogInAct">
+    tools:context=".Registro">
 
     <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="100dp"
+        android:id="@+id/ivLogo2"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:scaleType="centerInside"
         android:src="@drawable/logo" />
 
     <TextView
-        android:id="@+id/tvCrearInfo"
-        android:layout_width="200dp"
+        android:id="@+id/tvCrearInfo2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
@@ -27,70 +26,58 @@
         android:text="@string/createAccountInfo" />
 
     <TextView
-        android:id="@+id/tvUser"
+        android:id="@+id/tvUser2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/user_input"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextTextPersonName2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/tvPassword"
+        android:id="@+id/tvPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Password_input"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editTextTextPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/tvPassword3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Password_input2"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/btnLogIn"
-        android:layout_width="200dp"
+        android:id="@+id/btnLogIn2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:background="@drawable/circular_btn"
-        android:onClick="genero"
-        android:text="@string/LogIn"
-        android:textColor="#FFFFFF" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/preguntaCuenta" />
-
-    <TextView
-        android:id="@+id/tvCreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:onClick="crearCuenta"
-        android:text="@string/crear_cuenta"
-        android:textColor="@color/azul_link" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/fb"
-        android:shadowColor="#FFFFFF"
-        android:text="@string/fblog"
+        android:onClick="logIn"
+        android:text="@string/registro"
         android:textColor="#FFFFFF" />
 </LinearLayout>

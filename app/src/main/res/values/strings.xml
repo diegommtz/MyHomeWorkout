@@ -4,7 +4,9 @@
     <string name="createAccountInfo">Crear una cuenta te permite tener control de tu progreso.</string>
     <string name="user_input">Usuario:</string>
     <string name="Password_input">Contraseña:</string>
+    <string name="Password_input2">Confirmar contraseña:</string>
     <string name="LogIn">Iniciar Sesión</string>
+    <string name="registro">Registrar cuenta</string>
     <string name="preguntaCuenta">¿Aun no tienes cuenta?</string>
     <string name="crear_cuenta"><u>Crear cuenta</u></string>
     <string name="hombre">Hombre</string>
@@ -100,6 +102,6 @@
     <string name="title_MonitoreoProgreso">Progreso</string>
     <string name="descripcion_4_pasos">Esta información nos ayuda a saber más de ti y calcular con mayor exactitud tu progreso.</string>
     <string name="descripcion_2_pasos">Esta información nos ayuda a acondicionar las rutinas de acuerdo a tu meta y tiempo.</string>
-    
+
     <string name="felicidades">FELICIDADES, terminaste tu entrenamiento!</string>
 </resources>

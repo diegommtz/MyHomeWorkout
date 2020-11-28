@@ -14,45 +14,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Registro"></activity>
         <activity
             android:name=".MainMenu"
-            android:label="@string/title_activity_main_menu">
-        </activity>
-        <activity android:name=".HaciendoEjercicio"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait"></activity>
-
-
-        <activity android:name=".PosRutina"></activity>
+            android:label="@string/title_activity_main_menu"></activity>
+        <activity
+            android:name=".HaciendoEjercicio"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PosRutina" />
         <activity
             android:name=".PrevisRutina"
             android:label="@string/previs_rutina_titulo"
             android:parentActivityName=".PaginaInicial"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
-        <activity android:name=".Horario"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".Horario"
             android:label="@string/horario"
-            android:parentActivityName=".Objetivo"/>
-        <activity android:name=".Objetivo"
-            android:screenOrientation="portrait"
+            android:parentActivityName=".Objetivo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Objetivo"
             android:label="@string/meta"
-            android:parentActivityName=".Peso"/>
-
+            android:parentActivityName=".Peso"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar">
-
-        </activity>
-        <activity android:name=".PrevPhotos"
+            android:theme="@style/noToolBar"></activity>
+        <activity
+            android:name=".PrevPhotos"
             android:label="@string/fotos"
-            android:parentActivityName=".Horario">
-        </activity>
-
-
+            android:parentActivityName=".Horario"></activity>
         <activity
             android:name=".Peso"
             android:label="@string/peso"
@@ -66,7 +62,7 @@
         <activity
             android:name=".ProfileAct"
             android:label="@string/perfil"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Nacimiento"
             android:label="@string/nacimiento"
@@ -79,7 +75,7 @@
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar"/>
+            android:theme="@style/noToolBar" />
         <activity
             android:name=".MainActivity"
             android:label=""
@@ -87,6 +83,7 @@
             android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
