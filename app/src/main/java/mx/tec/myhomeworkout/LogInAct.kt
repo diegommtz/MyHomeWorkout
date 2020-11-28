@@ -19,4 +19,9 @@ class LogInAct : AppCompatActivity() {
         val intent = Intent(this@LogInAct, Genero::class.java)
         startActivity(intent)
     }
+
+    fun crearCuenta(view: View){
+        val intent = Intent(this@LogInAct, Registro::class.java)
+        startActivity(intent)
+    }
 }
