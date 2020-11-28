@@ -1,7 +1,8 @@
 package mx.tec.myhomeworkout.model
 
-class Musculo(
-    var id: String,
+import java.io.Serializable
+
+data class Musculo (
+    var idMusculo: String,
     var nombre: String
-) {
-}
+) : Serializable {}
