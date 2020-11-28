@@ -30,7 +30,6 @@ class LogInAct : AppCompatActivity() {
             .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         val service = retrofit.create(IMusculo::class.java)
 
         service.GetAllMusculos().enqueue(object: Callback<List<Musculo>> {
@@ -41,7 +40,6 @@ class LogInAct : AppCompatActivity() {
 
             override fun onResponse(call: Call<List<Musculo>>, response: Response<List<Musculo>>) {
                 val musculos = response.body()!!
-
                 Log.e("Workout-API", musculos.toString())
             }
         })
@@ -49,7 +47,7 @@ class LogInAct : AppCompatActivity() {
         /*val intent = Intent(this@LogInAct, Genero::class.java)
         startActivity(intent)*/
     }
-    
+
     fun crearCuenta(view: View){
         val intent = Intent(this@LogInAct, Registro::class.java)
         startActivity(intent)
