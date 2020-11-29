@@ -7,22 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_nacimiento.*
 import kotlinx.android.synthetic.main.activity_nacimiento.btnNext
 import kotlinx.android.synthetic.main.activity_peso.*
+import mx.tec.myhomeworkout.model.Persona
 
 class Horario : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val idPersona = intent.getStringExtra("idPersona")
-        println("idPersona en horario")
-        println(idPersona)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horario)
 
         btnNext.setOnClickListener {
+            val persona = intent.getSerializableExtra("Persona") as? Persona
             val intent = Intent(this@Horario, PrevPhotos::class.java)
-            intent.putExtra("idPersona", idPersona)
-
+            intent.putExtra("Persona", persona)
             startActivity(intent)
         }
-
 
         // SET VISIBILITY ELEMENTS
         val invisible = intent.getStringExtra("invisible")

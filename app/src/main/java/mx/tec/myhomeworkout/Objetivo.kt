@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.SQLOutput
 
 class Objetivo : AppCompatActivity() {
 
@@ -48,35 +49,19 @@ class Objetivo : AppCompatActivity() {
 
             if(persona!=null){
                 if(btnPerderPeso.isChecked){
-                    persona.objetivo = "Perder peso"
+                    persona.objetivo = "sRQW9JyHhqDlOBHA8pQQ"
                 }else if(btnGanarMusculo.isChecked){
-                    persona.objetivo = "Ganar músculo"
+                    persona.objetivo = "qhuIw5EkYioU4ulOj330"
                 }else{
-                    persona.objetivo = "En forma"
+                    persona.objetivo = "tZBoZlm08v1w3pYPu9ox"
                 }
             }
 
-            //Guardar persona en base de datos
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.100.9:3000/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            val service = retrofit.create(IPersona::class.java)
+            val intent = Intent(this@Objetivo, Horario::class.java)
+            intent.putExtra("Persona", persona)
+            startActivity(intent)
 
-            service.createPersona(persona).enqueue(object : Callback<Int> {
-                override fun onFailure(call: Call<Int>, t: Throwable) {
-                    t.message?.let { Log.e("RESTLIBS", it) }
-                }
 
-                override fun onResponse(call: Call<Int>, response: retrofit2.Response<Int>) {
-                    val intent = Intent(this@Objetivo, Horario::class.java)
-                    println("PERSONA")
-                    println(response.toString())
-                    intent.putExtra("idPersona", response.toString())
-                    startActivity(intent)
-                }
-            })
-            //--------------
 
         }
 

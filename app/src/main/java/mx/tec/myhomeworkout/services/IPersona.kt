@@ -12,10 +12,10 @@ interface IPersona {
     fun getPersona(@Path(value="id") id: Int) : Call<Persona>
 
     @POST("persona/")
-    fun createPersona(@Body persona: Persona?) : Call<Int>
+    fun createPersona(@Body persona: Persona?) : Call<String>
 
     @PUT("persona/{id}")
-    fun updatePersona(@Path(value="id") id: Int, @Body persona: Persona?) : Call<Int>
+    fun updatePersona(@Path(value="id") id: Int, @Body persona: Persona?) : Call<String>
 
     @DELETE("persona/{id}")
     fun deletePersona(@Path(value="id") id: Int) : Call<String>

@@ -28,15 +28,19 @@ class Genero : AppCompatActivity() {
     }
 
     fun nacimiento(view: View) {
+        val persona = intent.getSerializableExtra("Persona") as? Persona
         val intent = Intent(this@Genero, Nacimiento::class.java)
-        if(btnMujer.isChecked) {
-            var persona = Persona(null,null,null,"Mujer",null,null,null)
-            intent.putExtra("Persona", persona)
-            startActivity(intent)
-        }else {
-            var persona = Persona(null,null,null,"Hombre",null,null,null)
-            intent.putExtra("Persona", persona)
-            startActivity(intent)
+        if(persona!=null){
+            if(btnMujer.isChecked) {
+                persona.genero= "Mujer"
+                intent.putExtra("Persona", persona)
+                startActivity(intent)
+            }else {
+                persona.genero= "Mujer"
+                intent.putExtra("Persona", persona)
+                startActivity(intent)
+            }
         }
+
     }
 }
