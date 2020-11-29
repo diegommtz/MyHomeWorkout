@@ -1,4 +1,4 @@
-package mx.tec.myhomeworkout.data
+package mx.tec.myhomeworkout.services
 
 import mx.tec.myhomeworkout.model.Ejercicio
 import retrofit2.Call

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.NumberPicker
 import kotlinx.android.synthetic.main.activity_nacimiento.*
+import mx.tec.myhomeworkout.model.Persona
 
 class Altura : AppCompatActivity() {
 
@@ -19,7 +20,12 @@ class Altura : AppCompatActivity() {
         alturaPicker.value = 150
 
         btnNext.setOnClickListener {
+            val persona = intent.getSerializableExtra("Persona") as? Persona
+            if (persona != null) {
+                persona.altura = alturaPicker.value
+            }
             val intent = Intent(this@Altura, Peso::class.java)
+            intent.putExtra("Persona", persona)
             startActivity(intent)
         }
 
