@@ -5,5 +5,5 @@ import java.io.Serializable
 class Rutina(
     val idRutina: Int,
     val ejercicios: List<Ejercicio>,
-    val objetivo: String //Objetivo
+    val objetivo: Objetivo
 ) : Serializable {}

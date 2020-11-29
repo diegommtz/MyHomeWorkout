@@ -7,6 +7,6 @@ data class Persona (
     val altura: Float,
     val genero: String,
     val nacimiento: String,
-    val objetivo: String,
+    val objetivo: Objetivo,
     val peso: Float
 ) : Serializable {}
