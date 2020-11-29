@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import mx.tec.myhomeworkout.model.Persona
 
 class Genero : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,16 @@ class Genero : AppCompatActivity() {
         }
     }
 
-    fun nacimiento(view: View){
+    fun nacimiento(view: View) {
         val intent = Intent(this@Genero, Nacimiento::class.java)
-        startActivity(intent)
+        if(btnMujer.isChecked) {
+            var persona = Persona(null,null,null,"Mujer",null,null,null)
+            intent.putExtra("Persona", persona)
+            startActivity(intent)
+        }else {
+            var persona = Persona(null,null,null,"Hombre",null,null,null)
+            intent.putExtra("Persona", persona)
+            startActivity(intent)
+        }
     }
 }

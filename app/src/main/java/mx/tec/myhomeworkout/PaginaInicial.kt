@@ -21,6 +21,7 @@ import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
 class PaginaInicial : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagina_inicial)
 
@@ -63,10 +64,13 @@ class PaginaInicial : AppCompatActivity() {
 
     private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
+            //TODO : Aqui como paso el id? AIUDA
+            //val idPersona = intent.getStringExtra("idPersona")
             R.id.navigation_profileAct -> {
                 val intent = Intent(this@PaginaInicial, ProfileAct::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                 //        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                //intent.putExtra("idPersona", idPersona)
                 startActivity(intent)
                 //finish()
                 return@OnNavigationItemSelectedListener true

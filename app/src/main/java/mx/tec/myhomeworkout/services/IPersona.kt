@@ -1,4 +1,4 @@
-package mx.tec.myhomeworkout.data
+package mx.tec.myhomeworkout.services
 
 import mx.tec.myhomeworkout.model.Persona
 import retrofit2.Call
@@ -12,11 +12,11 @@ interface IPersona {
     fun getPersona(@Path(value="id") id: Int) : Call<Persona>
 
     @POST("persona/")
-    fun createPersona(@Body persona: Persona?) : Call<Boolean>
+    fun createPersona(@Body persona: Persona?) : Call<Int>
 
     @PUT("persona/{id}")
-    fun updatePersona(@Path(value="id") id: Int, @Body persona: Persona?) : Call<Boolean>
+    fun updatePersona(@Path(value="id") id: Int, @Body persona: Persona?) : Call<Int>
 
     @DELETE("persona/{id}")
-    fun deletePersona(@Path(value="id") id: Int) : Call<Boolean>
+    fun deletePersona(@Path(value="id") id: Int) : Call<String>
 }

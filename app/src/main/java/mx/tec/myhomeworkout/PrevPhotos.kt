@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
 
 class PrevPhotos : AppCompatActivity() {
-
+    val idPersona = intent.getStringExtra("idPersona")
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
@@ -54,6 +54,7 @@ class PrevPhotos : AppCompatActivity() {
             Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("idPersona", idPersona)
             startActivity(intent)
         }
 
