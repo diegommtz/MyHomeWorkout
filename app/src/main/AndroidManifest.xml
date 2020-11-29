@@ -28,7 +28,13 @@
             android:name=".PrevisRutina"
             android:label="@string/previs_rutina_titulo"
             android:parentActivityName=".PaginaInicial"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
         <activity android:name=".MonitoreaProceso" />
@@ -46,11 +52,7 @@
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".PrevPhotos"
@@ -83,7 +85,6 @@
             android:name=".LogInAct"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar" >
-
         </activity>
         <activity
             android:name=".MainActivity"

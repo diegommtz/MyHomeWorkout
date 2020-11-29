@@ -44,8 +44,8 @@ class LogInAct : AppCompatActivity() {
             }
         })
 
-        /*val intent = Intent(this@LogInAct, Genero::class.java)
-        startActivity(intent)*/
+        val intent = Intent(this@LogInAct, Genero::class.java)
+        startActivity(intent)
     }
 
     fun crearCuenta(view: View){
@@ -53,3 +53,6 @@ class LogInAct : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
+//if (persona.objetivo == perderpeso)
+//        GetRutina/idRutinaPerderPeso

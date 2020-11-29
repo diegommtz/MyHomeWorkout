@@ -35,7 +35,6 @@ class PaginaInicial : AppCompatActivity() {
         //bottomNavigation.setSelectedItemId(R.id.home)
         bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
 
-
         val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
         tvWelcomeMessage.setText(txt)
 
@@ -50,7 +49,6 @@ class PaginaInicial : AppCompatActivity() {
                 Log.e("Workout-API", "Error obteniendo datos de ejercicios")
                 Log.e("Workout-API", t.message!!)
             }
-
             override fun onResponse(call: Call<List<Ejercicio>>, response: Response<List<Ejercicio>>) {
                 ejercicios = response.body()!!
                 Log.e("Workout-API", ejercicios.toString())
@@ -60,10 +58,6 @@ class PaginaInicial : AppCompatActivity() {
                 rvLista.adapter = adaptador
             }
         })
-
-
-
-
 
         // TRAINERS LIST
         val entrenadores = listOf(
@@ -76,7 +70,6 @@ class PaginaInicial : AppCompatActivity() {
         rvLista_entrenadores.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
         rvLista_entrenadores.adapter = adaptador_entrenador
 
-
         //ONLICK LOOK TODAYS RUTINE
         btnPrevis.setOnClickListener {
             val intent = Intent(this@PaginaInicial, PrevisRutina::class.java)
@@ -84,7 +77,6 @@ class PaginaInicial : AppCompatActivity() {
         }
 
     }
-
 
     //NAVBAR
     private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
