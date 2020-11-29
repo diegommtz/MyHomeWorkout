@@ -50,6 +50,12 @@ class PrevPhotos : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
+
+            //TODO: POST DE HORARIO
+
+
+            //TODO: POST DE PERSONA
+
             val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
             Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
