@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface IEjercicio {
     @GET(value="ejercicio/")
-    fun getEjercicio(): Call<List<Ejercicio>>
+    fun getAllEjercicios(): Call<List<Ejercicio>>
 
     @GET(value="ejercicio/{idEjercicio}")
     fun getEjercicioById(@Path(value="idEjercicio") id:Int):Call<Ejercicio>

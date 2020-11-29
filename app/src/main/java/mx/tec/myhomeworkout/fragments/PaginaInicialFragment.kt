@@ -33,18 +33,6 @@ class PaginaInicialFragment: Fragment() {
         val rvLista=view.findViewById<RecyclerView>(R.id.rvLista)
 
 
-        val datos = listOf(
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Sentadillas"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Abdominales"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Jumping jacks"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Monster")
-        )
-
-        val adaptador = CustomAdapterSimpleExercise(requireContext(), R.layout.simple_exercise, datos, 0)
-
-        rvLista.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        rvLista.adapter = adaptador
 
         btnPrevis.setOnClickListener {
             val intent = Intent(context, PrevisRutina::class.java)

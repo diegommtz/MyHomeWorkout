@@ -4,22 +4,29 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
+import mx.tec.myhomeworkout.data.IEjercicio
+import mx.tec.myhomeworkout.data.IMusculo
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterEntrenador
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementEntrenador
 import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
+import mx.tec.myhomeworkout.model.Ejercicio
+import mx.tec.myhomeworkout.model.Musculo
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class PaginaInicial : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
+    lateinit var ejercicios: List<Ejercicio>
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -33,28 +40,45 @@ class PaginaInicial : AppCompatActivity() {
         val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
         tvWelcomeMessage.setText(txt)
 
-        val datos = listOf(
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Sentadillas"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Abdominales"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Jumping jacks"),
-            ElementSimpleExercise(R.drawable.img_mujer_plancking, "Monster")
-        )
+        // EJERCICIOS LIST
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IEjercicio::class.java)
+        service.getAllEjercicios().enqueue(object: Callback<List<Ejercicio>> {
+            override fun onFailure(call: Call<List<Ejercicio>>, t: Throwable) {
+                Log.e("Workout-API", "Error obteniendo datos de ejercicios")
+                Log.e("Workout-API", t.message!!)
+            }
 
+            override fun onResponse(call: Call<List<Ejercicio>>, response: Response<List<Ejercicio>>) {
+                ejercicios = response.body()!!
+                Log.e("Workout-API", ejercicios.toString())
+
+                val adaptador = CustomAdapterSimpleExercise(this@PaginaInicial, R.layout.simple_exercise, ejercicios, 0)
+                rvLista.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
+                rvLista.adapter = adaptador
+            }
+        })
+
+
+
+
+
+        // TRAINERS LIST
         val entrenadores = listOf(
-            ElementEntrenador(R.drawable.img_mujer_plancking, "Angie"),
-            ElementEntrenador(R.drawable.img_mujer_plancking, "Diego"),
-            ElementEntrenador(R.drawable.img_mujer_plancking, "Fer"),
-            ElementEntrenador(R.drawable.img_mujer_plancking, "Nava")
+            ElementEntrenador(R.drawable.entrenador_angie, "Angie"),
+            ElementEntrenador(R.drawable.entrenador_diego, "Diego"),
+            ElementEntrenador(R.drawable.entrenador_fer, "Fer"),
+            ElementEntrenador(R.drawable.entrenador_nava, "Nava")
         )
-
-        val adaptador = CustomAdapterSimpleExercise(this@PaginaInicial, R.layout.simple_exercise, datos, 0)
-        rvLista.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
-        rvLista.adapter = adaptador
-
         val adaptador_entrenador = CustomAdapterEntrenador(this@PaginaInicial, R.layout.layout_entrenadores, entrenadores, 0)
         rvLista_entrenadores.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
         rvLista_entrenadores.adapter = adaptador_entrenador
 
+
+        //ONLICK LOOK TODAYS RUTINE
         btnPrevis.setOnClickListener {
             val intent = Intent(this@PaginaInicial, PrevisRutina::class.java)
             startActivity(intent)
@@ -62,6 +86,8 @@ class PaginaInicial : AppCompatActivity() {
 
     }
 
+
+    //NAVBAR
     private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             //TODO : Aqui como paso el id? AIUDA

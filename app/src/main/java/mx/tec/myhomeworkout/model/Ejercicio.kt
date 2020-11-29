@@ -3,9 +3,10 @@ package mx.tec.myhomeworkout.model
 import java.io.Serializable
 
 class Ejercicio(
-    val idEjercicio: Int,
+    val idEjercicio: String,
     val dificultad: String,
     val focalizacion: String,
     val nombre: String,
-    val musculos: List<Musculo>
+    val video: String,
+    val musculos: List<Musculo>?
 ) : Serializable {}

@@ -7,7 +7,7 @@
         android:title="@string/title_MonitoreoProgreso" />
     <item
         android:id="@+id/navigation_paginaInicial"
-        android:icon="@drawable/profile_jump"
+        android:icon="@drawable/img_home"
         android:title="@string/title_paginaInicial" />
     <item
         android:id="@+id/navigation_profileActivity"

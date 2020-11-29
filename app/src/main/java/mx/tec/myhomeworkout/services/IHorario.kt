@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface IHorario {
 
     @GET(value="horario/")
-    fun getHorario(): Call<List<Horario>>
+    fun getAllHorarios(): Call<List<Horario>>
 
     @GET(value="horario/{idHorario}")
     fun getHorarioById(@Path(value="idHorario") id:Int): Call<Horario>
