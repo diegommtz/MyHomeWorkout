@@ -12,11 +12,10 @@
         android:title="@string/title_MonitoreoProgreso" />
     <item
         android:id="@+id/navigation_paginaInicial"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/img_home"
         android:title="@string/title_paginaInicial" />
     <item
         android:id="@+id/navigation_profileAct"
         android:icon="@drawable/profile_workout"
         android:title="@string/title_ProfileAct" />
-
 </menu>

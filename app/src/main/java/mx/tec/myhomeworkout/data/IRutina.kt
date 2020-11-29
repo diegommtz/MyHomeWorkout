@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface IRutina {
     @GET(value="rutina/")
-    fun getRutina(): Call<List<Rutina>>
+    fun getAllRutinas(): Call<List<Rutina>>
 
     @GET(value="rutina/{idRutina}")
     fun getRutinaById(@Path(value="idRutina") id:Int): Call<Rutina>

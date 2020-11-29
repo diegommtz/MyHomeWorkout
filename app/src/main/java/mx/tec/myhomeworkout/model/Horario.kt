@@ -3,7 +3,7 @@ package mx.tec.myhomeworkout.model
 import java.io.Serializable
 
 data class Horario(
-    val idHorario: Int,
+    val idHorario: String,
     val minuto: Int,
     val hora: Int,
     val domingo: Boolean,

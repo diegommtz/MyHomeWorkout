@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface IObjetivo {
 
     @GET(value="objetivo/")
-    fun getEjercicio(): Call<List<Objetivo>>
+    fun getallObjetivos(): Call<List<Objetivo>>
 
     @GET(value="objetivo/{idObjetivo}")
     fun getObjetivoById(@Path(value="idObjetivo") id:Int): Call<Objetivo>

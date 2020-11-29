@@ -3,7 +3,7 @@ package mx.tec.myhomeworkout.model
 import java.io.Serializable
 
 data class Persona (
-    val idPersona: Int,
+    val idPersona: String,
     val altura: Float,
     val genero: String,
     val nacimiento: String,
