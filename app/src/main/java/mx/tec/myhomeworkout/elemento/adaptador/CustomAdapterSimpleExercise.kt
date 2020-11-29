@@ -1,39 +1,52 @@
 package mx.tec.myhomeworkout.elemento.adaptador
 
 import android.content.Context
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
 import mx.tec.myhomeworkout.R
-import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
+import mx.tec.myhomeworkout.model.Ejercicio
 
 class CustomAdapterSimpleExercise (private val context: Context,
                                    private val layout: Int,
-                                   private val dataSource: List<ElementSimpleExercise>,
+                                   private val dataSource: List<Ejercicio>,
                                    private val animation:  Int)
     : RecyclerView.Adapter<CustomAdapterSimpleExercise.ElementoViewHolder>(){
 
-    class ElementoViewHolder(inflater: LayoutInflater,
+    inner class ElementoViewHolder(inflater: LayoutInflater,
                              parent: ViewGroup,
                              layout: Int)
         : RecyclerView.ViewHolder(inflater.inflate(layout, parent, false)){
 
         //Viewholder es la clase que se encarga de manipular los controles de los elementos
         var imagen: ImageView? = null
+        var video: VideoView? = null
+
         var nombre: TextView? = null
 
         init{
             imagen = itemView.findViewById(R.id.ivSimpleExercise)
+            video = itemView.findViewById(R.id.vvSimpleExercise)
             nombre = itemView.findViewById(R.id.tvSimpleExercise)
         }
 
         //establece los valores
-        fun bindData(elemento:ElementSimpleExercise){
-            imagen!!.setImageResource(elemento.imagen)
+        fun bindData(elemento:Ejercicio){
+            //imagen!!.setImageResource(elemento.imagen)
             nombre!!.text = elemento.nombre
+            val onlineUri = Uri.parse(elemento.video)
+            video!!.setVideoURI(onlineUri)
+            video!!.setMediaController(null)
+            video!!.setOnPreparedListener { mp -> mp.isLooping = true }
+            video!!.requestFocus()
+            video!!.start()
+            println("BINDING DATA EJERCICIO")
+            Log.e("BINDIIIING", "-----------------------------AQUI-----------------------")
         }
 
 
