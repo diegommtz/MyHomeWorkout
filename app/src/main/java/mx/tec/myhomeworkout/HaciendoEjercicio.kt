@@ -1,12 +1,14 @@
 package mx.tec.myhomeworkout
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.ViewGroup
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.webkit.URLUtil
 import android.widget.MediaController
@@ -14,9 +16,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import mx.tec.myhomeworkout.fragments.MonitoreoProgresoGraficasFragment
 import mx.tec.myhomeworkout.fragments.PaginaInicialFragment
 import mx.tec.myhomeworkout.fragments.ProfileActFragment
+import mx.tec.myhomeworkout.model.Ejercicio
+import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.model.Rutina
+import mx.tec.myhomeworkout.services.IPersona
+import mx.tec.myhomeworkout.services.IRutina
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class HaciendoEjercicio : AppCompatActivity() {
@@ -32,9 +45,52 @@ class HaciendoEjercicio : AppCompatActivity() {
     private var isCancelled = false
     private var resumeFromMillis: Long = 0
 
+    lateinit var idRutina: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_haciendo_ejercicio)
+
+        // ------------------
+        // ------------------
+        // ------------------
+        val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
+        val idUsuario = sp.getString("idUsuario", "")
+        var idObjetivo: String
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IPersona::class.java)
+
+
+        service.getPersona(idUsuario).enqueue(object : Callback<Persona> {
+            override fun onResponse(call: Call<Persona>, response: Response<Persona>) {
+                val persona = response.body()
+                idObjetivo = persona?.objetivo!!.idObjetivo
+
+                if(idObjetivo == "qhuIw5EkYioU4ulOj330")
+                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
+                if(idObjetivo == "sRQW9JyHhqDlOBHA8pQQ")
+                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
+                if(idObjetivo == "sRQW9JyHhqDlOBHA8pQQ")
+                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
+
+                getRutina()
+            }
+
+            override fun onFailure(call: Call<Persona>, t: Throwable) {
+                t.message?.let { Log.e("RESTLIBS", it) }
+            }
+        })
+
+        // ------------------
+        // ------------------
+        // ------------------
+
+        val ejercicios: List<Ejercicio> = rutina.ejercicio
+        val index = 0;
 
         val dayArray =
             resources.getStringArray(R.array.dayArray)//tomamos los valores que tenemos en los recursos
@@ -120,6 +176,32 @@ class HaciendoEjercicio : AppCompatActivity() {
         controller.setMediaPlayer(videoView)
         videoView.setMediaController(controller)
     }
+
+    // ------------------
+    // ------------------
+    // ------------------
+    fun getRutina() {
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IRutina::class.java)
+
+
+        service.getRutinaById(idRutina).enqueue(object : Callback<Rutina> {
+            override fun onResponse(call: Call<Rutina>, response: Response<Rutina>) {
+                val rutina = response.body()
+            }
+
+            override fun onFailure(call: Call<Rutina>, t: Throwable) {
+                t.message?.let { Log.e("RESTLIBS", it) }
+            }
+        })
+    }
+    // ------------------
+    // ------------------
+    // ------------------
 
     //Función para cargar varios fragments
     //Recibe: Fragment
