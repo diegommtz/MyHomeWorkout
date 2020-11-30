@@ -36,11 +36,7 @@
 
         <activity android:name=".MonitoreaProceso"
             android:label="Monitorea tu proceso">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Horario"
@@ -89,6 +85,11 @@
             android:name=".LogInAct"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
         </activity>

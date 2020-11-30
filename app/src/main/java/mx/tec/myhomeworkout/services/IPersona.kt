@@ -21,7 +21,7 @@ interface IPersona {
     fun createPersona(@Body persona: Persona?) : Call<String>
 
     @PUT(value="persona/")
-    fun updatePersona(@Body persona: Persona) : Call<Persona>
+    fun updatePersona(@Body persona: Persona) : Call<String>
 
     @DELETE("persona/{id}")
     fun deletePersona(@Path(value="id") id: String?) : Call<String>

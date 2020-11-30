@@ -3,15 +3,22 @@ package mx.tec.myhomeworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_objetivo.*
 import kotlinx.android.synthetic.main.activity_objetivo.btnNext
 import kotlinx.android.synthetic.main.activity_peso.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Objetivo
 import mx.tec.myhomeworkout.services.IPersona
 import mx.tec.myhomeworkout.model.Persona
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ObjetivoAct : AppCompatActivity() {
 
@@ -67,20 +74,46 @@ class ObjetivoAct : AppCompatActivity() {
         }
 
         btnOkObjetivo.setOnClickListener{
-            var objetivoTexto: String
+            //------------------
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+            val persona = intent.getSerializableExtra("personaObjetivo") as? Persona
+
             if(btnPerderPeso.isChecked){
-                objetivoTexto = "Perder peso"
+                objetivo = Objetivo("sRQW9JyHhqDlOBHA8pQQ", "")
             }else if(btnGanarMusculo.isChecked){
-                objetivoTexto = "Ganar músculo"
+                objetivo = Objetivo("qhuIw5EkYioU4ulOj330", "")
             }else{
-                objetivoTexto = "Estar en forma"
+                objetivo = Objetivo("tZBoZlm08v1w3pYPu9ox", "")
             }
-            val intent = Intent(this@ObjetivoAct, ProfileAct::class.java)
-            intent.putExtra("objetivo", true)
-            intent.putExtra(
-                "nuevoObjetivo", objetivoTexto
-            )
-            startActivity(intent)
+            persona?.objetivo = objetivo
+
+            if (persona != null) {
+                service.updatePersona(persona).enqueue(object : Callback<String> {
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        t.message?.let { Log.e("RESTLIBS", it) }
+                    }
+
+                    override fun onResponse(
+                        call: Call<String>,
+                        response: retrofit2.Response<String>
+                    ) {
+                        Toast.makeText(
+                            this@ObjetivoAct,
+                            "Se actualizó la información",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this@ObjetivoAct, ProfileAct::class.java)
+                        startActivity(intent)
+                    }
+                })
+            }
+
+            //------------------
+
         }
         // SET VISIBILITY ELEMENTS
         val invisible = intent.getStringExtra("invisible")

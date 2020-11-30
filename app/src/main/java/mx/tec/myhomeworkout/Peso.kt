@@ -3,11 +3,21 @@ package mx.tec.myhomeworkout
 import android.R.attr.x
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_objetivo.*
 import kotlinx.android.synthetic.main.activity_peso.*
+import kotlinx.android.synthetic.main.activity_peso.btnNext
+import mx.tec.myhomeworkout.model.Objetivo
 import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IPersona
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class Peso : AppCompatActivity() {
@@ -35,13 +45,40 @@ class Peso : AppCompatActivity() {
         }
 
         btnOkPeso.setOnClickListener{
-            val intent = Intent(this@Peso, ProfileAct::class.java)
-            intent.putExtra("peso", true)
-            intent.putExtra(
-                "nuevoPeso",
-                pesoUnidadesPicker.value.toFloat() + (pesoDecimalesPicker.value).toFloat() / 10
-            )
-            startActivity(intent)
+
+            //----------------
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+            val persona = intent.getSerializableExtra("personaObjetivo") as? Persona
+
+            persona?.peso = pesoUnidadesPicker.value.toFloat() + (pesoDecimalesPicker.value).toFloat() / 10
+
+            if (persona != null) {
+                service.updatePersona(persona).enqueue(object : Callback<String> {
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        t.message?.let { Log.e("RESTLIBS", it) }
+                    }
+
+                    override fun onResponse(
+                        call: Call<String>,
+                        response: retrofit2.Response<String>
+                    ) {
+                        Toast.makeText(
+                            this@Peso,
+                            "Se actualizó la información",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this@Peso, ProfileAct::class.java)
+                        startActivity(intent)
+                    }
+                })
+            }
+
+            //------------------
+            //-----------------
         }
         // SET VISIBILITY ELEMENTS
         val invisible = intent.getStringExtra("invisible")

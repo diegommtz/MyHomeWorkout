@@ -48,9 +48,6 @@ class ProfileAct : AppCompatActivity() {
         lateinit var persona: Persona
 
         var idPersona: String? = ""
-        var altura: Float?
-        val nuevoPeso = intent.getBooleanExtra("peso", false)
-        val nuevoObjetivo = intent.getBooleanExtra("objetivo", false)
 
             //Cargar datos persona
             val retrofit: Retrofit = Retrofit.Builder()
@@ -84,15 +81,6 @@ class ProfileAct : AppCompatActivity() {
                         )
                     }).toString() + "%"
                     tvPesoIdeal.text = ((persona.altura)?.minus(100)).toString() + "Kg."
-
-                    if (nuevoPeso) {
-                        var pesoCambio = intent.getFloatExtra("nuevoPeso", 0f)
-                        tvPesoInicial.text = (pesoCambio.toString())
-                    }
-                    if (nuevoObjetivo) {
-                        var pesoObjetivo = intent.getStringExtra("nuevoObjetivo")
-                        tvMeta.text = (pesoObjetivo.toString())
-                    }
                 }
             })
 
@@ -101,6 +89,7 @@ class ProfileAct : AppCompatActivity() {
             //Toast.makeText(this@ProfileAct, "MAIN usuario  password", Toast.LENGTH_LONG).show();
             val intent = Intent(this@ProfileAct, ObjetivoAct::class.java)
             intent.putExtra("persistObjetivo", persona.objetivo?.nombre.toString())
+            intent.putExtra("personaObjetivo", persona)
             intent.putExtra("invisible", "true")
             startActivity(intent)
         }
@@ -113,53 +102,8 @@ class ProfileAct : AppCompatActivity() {
             val intent = Intent(this@ProfileAct, Peso::class.java)
             intent.putExtra("invisible", "true")
             intent.putExtra("persistPeso", persona.peso)
+            intent.putExtra("personaObjetivo", persona)
             startActivity(intent)
-        }
-
-        btnActualizar.setOnClickListener{
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            val service = retrofit.create(IPersona::class.java)
-
-            val peso = tvPesoInicial.text.toString().toFloat()
-            persona.peso=peso
-            val objetivo = tvMeta.text.toString()
-
-            if(objetivo.equals("Ganar músculo")){
-                persona.objetivo?.idObjetivo = "qhuIw5EkYioU4ulOj330"
-            }else if(objetivo.equals("Perder peso")){
-                persona.objetivo?.idObjetivo = "sRQW9JyHhqDlOBHA8pQQ"
-            }else{
-                persona.objetivo?.idObjetivo = "tZBoZlm08v1w3pYPu9ox"
-            }
-
-            service.updatePersona(persona).enqueue(object : Callback<Persona> {
-                override fun onFailure(call: Call<Persona>, t: Throwable) {
-                    t.message?.let { Log.e("RESTLIBS", it) }
-                }
-
-                override fun onResponse(
-                    call: Call<Persona>,
-                    response: retrofit2.Response<Persona>
-                ) {
-                    Toast.makeText(
-                        this@ProfileAct,
-                        "Se actualizó la información",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    tvIMC.text = ((persona.altura?.div(100f))?.times(
-                        (persona.altura?.div(
-                            100f
-                        )!!)
-                    )?.let {
-                        persona.peso?.div(
-                            it
-                        )
-                    }).toString() + "%"
-                }
-            })
         }
 
 
