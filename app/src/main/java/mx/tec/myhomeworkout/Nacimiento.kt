@@ -13,6 +13,8 @@ class Nacimiento : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nacimiento)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        fechaPicker.maxDate = Date().time
     }
 
     fun altura(view: View) {
