@@ -8,7 +8,9 @@ import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_objetivo.*
 import kotlinx.android.synthetic.main.activity_objetivo.btnNext
 import kotlinx.android.synthetic.main.activity_peso.*
+import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Objetivo
+import mx.tec.myhomeworkout.services.IPersona
 import mx.tec.myhomeworkout.model.Persona
 
 class ObjetivoAct : AppCompatActivity() {
@@ -17,30 +19,36 @@ class ObjetivoAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_objetivo)
         var objetivo : Objetivo
+
+
         // INIT TOGGLE BUTTONS
         btnPerderPeso.setChecked(true)
         btnGanarMusculo.setChecked(false)
         btnEstarEnForma.setChecked(false)
+        lateinit var miObjetivo:String
 
         // ON CLICK
         btnPerderPeso.setOnClickListener {
             btnPerderPeso.setChecked(true)
             btnGanarMusculo.setChecked(false)
             btnEstarEnForma.setChecked(false)
+            miObjetivo="PerderPeso"
         }
         btnGanarMusculo.setOnClickListener {
             btnPerderPeso.setChecked(false)
             btnGanarMusculo.setChecked(true)
             btnEstarEnForma.setChecked(false)
+            miObjetivo="GanarMusculo"
         }
         btnEstarEnForma.setOnClickListener {
             btnPerderPeso.setChecked(false)
             btnGanarMusculo.setChecked(false)
             btnEstarEnForma.setChecked(true)
+            miObjetivo="EstarEnForma"
         }
         btnNext.setOnClickListener {
             val persona = intent.getSerializableExtra("Persona") as? Persona
-
+            //val tObjetivo = ObjetivoModel("0",miObjetivo)
             if(persona!=null){
                 if(btnPerderPeso.isChecked){
                     objetivo = Objetivo("sRQW9JyHhqDlOBHA8pQQ", "")
@@ -54,6 +62,7 @@ class ObjetivoAct : AppCompatActivity() {
 
             val intent = Intent(this@ObjetivoAct, Horario::class.java)
             intent.putExtra("Persona", persona)
+            //intent.putExtra("Objetivo",tObjetivo)
             startActivity(intent)
         }
 

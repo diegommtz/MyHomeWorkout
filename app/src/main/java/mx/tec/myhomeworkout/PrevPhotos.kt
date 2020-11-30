@@ -21,7 +21,10 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import kotlinx.android.synthetic.main.activity_prev_photos.*
+import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
+import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IHorario
 import mx.tec.myhomeworkout.services.IPersona
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,6 +79,7 @@ class PrevPhotos : AppCompatActivity() {
             //TODO: POST DE HORARIO
 
 
+
             //TODO: POST DE PERSONA
             val persona = intent.getSerializableExtra("Persona") as? Persona
 
@@ -91,16 +95,38 @@ class PrevPhotos : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
-                    val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                    Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
-                        .show()
-                    with(sp.edit()){
-                        putString("idUsuario", response.body())
-                        commit()
-                    }
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+
+
+                    val horario=intent.getSerializableExtra("Horario") as? HorarioModel
+                    val retrofitHorario: Retrofit = Retrofit.Builder()
+                        .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                    val serviceHorario = retrofitHorario.create(IHorario::class.java)
+
+                    val idUsuario=response.body()!!
+
+                    serviceHorario.createHorario(idUsuario,horario!!).enqueue(object : Callback<String> {
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            t.message?.let { Log.e("RESTLIBS", it) }
+                        }
+
+                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+                            Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
+                                .show()
+                            with(sp.edit()){
+                                putString("idUsuario", idUsuario)
+                                commit()
+                            }
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+                    })
+
+
+
                 }
             })
 
@@ -182,3 +208,5 @@ class PrevPhotos : AppCompatActivity() {
         }
     }
 }
+
+

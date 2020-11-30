@@ -46,6 +46,7 @@
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar"></activity>
+
         <activity
             android:name=".PrevPhotos"
             android:label="@string/fotos"
@@ -82,12 +83,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
         <activity
         android:name=".MainActivity"
         android:label=""
         android:screenOrientation="portrait"
-        android:theme="@style/splashTheme"></activity>
+        android:theme="@style/splashTheme">
+
+        </activity>
 </application>
 
     </manifest>
