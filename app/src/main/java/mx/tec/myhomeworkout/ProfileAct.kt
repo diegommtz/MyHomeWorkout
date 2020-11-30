@@ -20,6 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import kotlin.math.floor
 
 
 class ProfileAct : AppCompatActivity() {
@@ -74,7 +75,8 @@ class ProfileAct : AppCompatActivity() {
                     tvMeta.text = persona.objetivo?.nombre.toString()
                     tvPesoInicial.text = (persona.peso.toString())
                     tvEntrenamientos.text = persona.entrenamientos.toString()
-                    tvIMC.text = ((persona.altura?.div(100f))?.times(
+
+                    var numero: Float? = ((persona.altura?.div(100f))?.times(
                         (persona.altura?.div(
                             100f
                         )!!)
@@ -82,7 +84,10 @@ class ProfileAct : AppCompatActivity() {
                         persona.peso?.div(
                             it
                         )
-                    }).toString() + "%"
+                    })
+                    numero = floor(numero!!)
+
+                    tvIMC.text = numero.toString() + "%"
                     tvPesoIdeal.text = ((persona.altura)?.minus(100)).toString() + "Kg."
 
 

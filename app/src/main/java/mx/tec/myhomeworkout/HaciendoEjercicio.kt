@@ -208,7 +208,6 @@ class HaciendoEjercicio : AppCompatActivity() {
         if(actEjercicio.repeticiones == false)
         {
             ejerTimer = true
-            Toast.makeText(this, "TIEMPOOO", Toast.LENGTH_SHORT).show()
             millisInFuture = (actEjercicio.cantidadTiempo)!!.toLong() * 1000
             timer(millisInFuture, countDownInterval).start()
         }else{
