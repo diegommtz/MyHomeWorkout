@@ -6,7 +6,7 @@ import java.sql.Timestamp
 
 data class Foto (
     var idFoto: String,
-    var fecha: JsonObject,
+    var fecha: JsonObject?,
     var fotoDerecha: String,
     var fotoFrontal: String,
     var fotoEspalda: String

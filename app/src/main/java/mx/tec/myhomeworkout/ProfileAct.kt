@@ -10,10 +10,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_profile.*
+import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IHorario
 import mx.tec.myhomeworkout.services.IPersona
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -81,6 +84,10 @@ class ProfileAct : AppCompatActivity() {
                         )
                     }).toString() + "%"
                     tvPesoIdeal.text = ((persona.altura)?.minus(100)).toString() + "Kg."
+
+
+                    obtenerHorario(persona.idPersona!!)
+
                 }
             })
 
@@ -111,6 +118,44 @@ class ProfileAct : AppCompatActivity() {
         //bottomNavigation.setSelectedItemId(R.id.home)
         bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
 
+    }
+
+    fun obtenerHorario(idPersona: String) {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IHorario::class.java)
+
+        service.getHorarioById(idPersona).enqueue(object : Callback<HorarioModel> {
+            override fun onResponse(call: Call<HorarioModel>, response: Response<HorarioModel>) {
+                val horario = response.body()!!
+
+                var dias = ""
+
+                if(horario.lunes!!)
+                    dias += "lu "
+                if(horario.martes!!)
+                    dias += "ma "
+                if(horario.miercoles!!)
+                    dias += "mi "
+                if(horario.jueves!!)
+                    dias += "ju "
+                if(horario.viernes!!)
+                    dias += "vi "
+                if(horario.sabado!!)
+                    dias += "sa "
+                if(horario.domingo!!)
+                    dias += "do "
+
+                tvHorario.text = dias
+            }
+
+            override fun onFailure(call: Call<HorarioModel>, t: Throwable) {
+                t.message?.let { Log.e("RESTLIBS", it) }
+            }
+
+        })
     }
 
     private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->

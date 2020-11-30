@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface IFoto {
     @POST("foto/{idPersona}")
-    fun CreateFoto(@Path(value="idPersona") idPersona: String, @Body foto: Foto) : Call<Foto>
+    fun CreateFoto(@Path(value="idPersona") idPersona: String, @Body foto: Foto) : Call<String>
 
     @GET(value="foto/{idPersona}/{idFoto}")
     fun GetFotoPersonaById(@Path(value="idPersona") idPersona: String, @Path(value="idFoto") idFoto: String) : Call<Foto>

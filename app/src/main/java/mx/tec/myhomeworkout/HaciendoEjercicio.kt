@@ -15,12 +15,7 @@ import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_haciendo_ejercicio.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import mx.tec.myhomeworkout.fragments.MonitoreoProgresoGraficasFragment
-import mx.tec.myhomeworkout.fragments.PaginaInicialFragment
-import mx.tec.myhomeworkout.fragments.ProfileActFragment
 import mx.tec.myhomeworkout.model.Ejercicio
 import mx.tec.myhomeworkout.model.Persona
 import mx.tec.myhomeworkout.model.Rutina
@@ -46,6 +41,7 @@ class HaciendoEjercicio : AppCompatActivity() {
     private var isCancelled = false
     private var resumeFromMillis: Long = 0
 
+    lateinit var idUsuario: String
     lateinit var idRutina: String
     lateinit var rutina: Rutina
     lateinit var ejercicios: List<Ejercicio>
@@ -60,8 +56,8 @@ class HaciendoEjercicio : AppCompatActivity() {
         // ------------------
         // ------------------
         val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
-        val idUsuario = sp.getString("idUsuario", "")
 
+        idUsuario = sp.getString("idUsuario", "")!!
         var idObjetivo: String
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -113,11 +109,11 @@ class HaciendoEjercicio : AppCompatActivity() {
             }
 
             //al hacer clic abre un cuadro de diálogo con 3 nuevos botones
-            btnQuestion.setOnClickListener {
+            //btnQuestion.setOnClickListener {
                 //No supe de qué otra forma hacer esto
                 //Con el mismo botón abre la info y sale de la info
-                replaceFragment(InfoFragment())
-            }
+               // replaceFragment(InfoFragment())
+            //}
 
             //Depende el "dayOfWeek" se asigna un día
             //"dayOfWeek" está dado en numérico, por eso el "when"
@@ -136,7 +132,7 @@ class HaciendoEjercicio : AppCompatActivity() {
 
             //Asigno información a los txtView
             txtDay.setText(todayIs)
-            txtTiempo.setText("30" + " " + "Minutos")
+            txtCantidad.setText("30" + " " + "Minutos")
             txtExercise.setText("FULL-BODY")
             //txtTiempoFaltante.setText("29")
         }
@@ -146,7 +142,7 @@ class HaciendoEjercicio : AppCompatActivity() {
 
 
         //Con un mismo botón: inicio, pause, resumo
-        btnPause.setOnClickListener {
+        /*btnPause.setOnClickListener {
 
             if(ejerTimer == false) return@setOnClickListener
 
@@ -170,7 +166,7 @@ class HaciendoEjercicio : AppCompatActivity() {
                 //it.isEnabled = false
             }
             itera++
-        }
+        }*/
 
         val controller = MediaController(this)
         controller.setMediaPlayer(videoView)
@@ -188,14 +184,12 @@ class HaciendoEjercicio : AppCompatActivity() {
             .build()
         val service = retrofit.create(IRutina::class.java)
 
-
         service.getRutinaById(idRutina).enqueue(object : Callback<Rutina> {
             override fun onResponse(call: Call<Rutina>, response: Response<Rutina>) {
                 rutina = response.body()!!
                 ejercicios = rutina.ejercicios
 
                 txtExercise.text = rutina.nombre
-
                 startTraining()
             }
 
@@ -217,6 +211,8 @@ class HaciendoEjercicio : AppCompatActivity() {
             Toast.makeText(this, "TIEMPOOO", Toast.LENGTH_SHORT).show()
             millisInFuture = (actEjercicio.cantidadTiempo)!!.toLong() * 1000
             timer(millisInFuture, countDownInterval).start()
+        }else{
+            txtTiempoFaltante.text = "${txtTiempoFaltante.text} Reps"
         }
 
         //Obtener el video
@@ -234,7 +230,14 @@ class HaciendoEjercicio : AppCompatActivity() {
 
         //Obtener nombre
         txtExerciseName.text = actEjercicio.nombre
+        txtCantidad.setText(actEjercicio.cantidadTiempo.toString())
+        if (actEjercicio.repeticiones == true){
+            txtTiempoReps.setText("Repeticiones")
 
+        }else{
+            txtTiempoReps.setText("Segundos")
+
+        }
         //Obtener repeticiones/tiempo
         txtTiempoFaltante.text = actEjercicio.cantidadTiempo.toString()
     }
@@ -294,13 +297,27 @@ class HaciendoEjercicio : AppCompatActivity() {
     fun changeVideo(view: View) {
 
         if (ejerIndex + 1 >= ejercicios.size) {
-            val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
-            startActivity(intent)
+
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+
+            service.aumentarEntrenamiento(idUsuario).enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    t.message?.let { Log.e("RESTLIBS", it) }
+                }
+            })
         } else {
             ejerIndex++
             startTraining()
         }
-
     }
 
     fun changeVideoBack(view: View) {
