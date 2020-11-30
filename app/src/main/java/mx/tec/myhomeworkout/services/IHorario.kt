@@ -16,8 +16,8 @@ interface IHorario {
     @PUT(value="horario/")
     fun updateHorario(@Body ejercicio: HorarioModel): Call<HorarioModel>
 
-    @POST("horario/")
-    fun createHorario(@Body ejercicio: HorarioModel): Call<String>
+    @POST("horario/{idPersona}")
+    fun createHorario(@Path(value="idPersona")id:String,@Body ejercicio: HorarioModel): Call<String>
 
     @DELETE("horario/{idHorario}/")
     fun deleteHorario(@Path("idHorario") id: Int): Call<String>

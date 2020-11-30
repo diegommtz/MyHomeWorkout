@@ -23,7 +23,7 @@ class Registro : AppCompatActivity() {
            if(contrasena==contrasena2)
            {
                val intent = Intent(this@Registro, Genero::class.java)
-               val persona = Persona(0,nombre,contrasena,0, "","","",0f)
+               val persona = Persona("",nombre,contrasena,0, "","",null,0f)
                intent.putExtra("Persona", persona)
                startActivity(intent)
            }else{

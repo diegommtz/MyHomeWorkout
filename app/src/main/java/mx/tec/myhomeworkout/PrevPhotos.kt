@@ -1,17 +1,25 @@
 package mx.tec.myhomeworkout
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.media.Image
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
 import mx.tec.myhomeworkout.model.HorarioModel
@@ -22,19 +30,28 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PrevPhotos : AppCompatActivity() {
+
+    //val storage = FirebaseStorage.getInstance()
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
-    val imagesTitles = arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
-    val imageList = ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+    val imagesTitles =
+        arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
+    val imageList =
+        ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prev_photos)
+        val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
 
-        if(savedInstanceState != null) return
+        if (savedInstanceState != null) return
 
         //replaceFragment(MarcoFrente(), R.string.foto_frontal)
 
@@ -46,41 +63,21 @@ class PrevPhotos : AppCompatActivity() {
 
         slider.setImageList(imageList)
 
-        slider.setItemChangeListener(object : ItemChangeListener{
+        slider.setItemChangeListener(object : ItemChangeListener {
             override fun onItemChanged(position: Int) {
                 index = position;
                 tvAltura.setText(imagesTitles[index])
             }
         })
 
-        pickerFoto.setOnClickListener{
+        pickerFoto.setOnClickListener {
             SelectImage()
         }
 
         btnNext.setOnClickListener {
 
             //TODO: POST DE HORARIO
-            val horario=intent.getSerializableExtra("Horario") as? HorarioModel
-            val retrofitHorario: Retrofit = Retrofit.Builder()
-                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            val serviceHorario = retrofitHorario.create(IHorario::class.java)
 
-            serviceHorario.createHorario(horario!!).enqueue(object : Callback<String> {
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    t.message?.let { Log.e("RESTLIBS", it) }
-                }
-
-                override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
-                    val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                    Toast.makeText(this@PrevPhotos, "¡Tu Horario se ha creado!", Toast.LENGTH_SHORT).show()
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    Log.e("test","Carga")
-                }
-            })
 
 
             //TODO: POST DE PERSONA
@@ -99,15 +96,52 @@ class PrevPhotos : AppCompatActivity() {
 
                 override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
 
-                    val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                    Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+
+                    val horario=intent.getSerializableExtra("Horario") as? HorarioModel
+                    val retrofitHorario: Retrofit = Retrofit.Builder()
+                        .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                    val serviceHorario = retrofitHorario.create(IHorario::class.java)
+
+                    val idUsuario=response.body()!!
+
+                    serviceHorario.createHorario(idUsuario,horario!!).enqueue(object : Callback<String> {
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            t.message?.let { Log.e("RESTLIBS", it) }
+                        }
+
+                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+                            Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
+                                .show()
+                            with(sp.edit()){
+                                putString("idUsuario", idUsuario)
+                                commit()
+                            }
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+                    })
+
+
+
                 }
             })
+
+
+
             //--------------
         }
+
+        /*@RequiresApi(Build.VERSION_CODES.KITKAT)
+        fun UploadPhoto(){
+            val path = "cuerpo/" + UUID.randomUUID() + ".png"
+            val firePathRef = storage.getReference(path)
+            val metadata = StorageMetadata.Builder().setCustomMetadata("caption", "hola").build()
+            uploadTask = firePathRef.putBytes(data, metadata)
+        }*/
 
         /*
         btnEspalda.setOnClickListener {
@@ -131,13 +165,12 @@ class PrevPhotos : AppCompatActivity() {
         fragmentTransaction.commit()
     }*/
 
-    fun SelectImage()
-    {
+    fun SelectImage() {
         val items = arrayOf("Camera", "Gallery", "Cancel")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Elige una opción")
         builder.setItems(items) { dialog, which ->
-            when(items[which]) {
+            when (items[which]) {
                 "Camera" -> {
                     val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(i, requestCamera)
@@ -145,7 +178,10 @@ class PrevPhotos : AppCompatActivity() {
                 "Gallery" -> {
                     val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     i.type = "image/*"
-                    startActivityForResult(Intent.createChooser(i, "Selecciona una imagen"), selectFile)
+                    startActivityForResult(
+                        Intent.createChooser(i, "Selecciona una imagen"),
+                        selectFile
+                    )
                 }
                 "Cancel" -> {
                     dialog.dismiss()
@@ -153,21 +189,18 @@ class PrevPhotos : AppCompatActivity() {
             }
         }
         builder.show()
-     }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK)
-        {
-            if(requestCode == requestCamera){
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == requestCamera) {
                 val bundle: Bundle = data?.extras!!
                 val bmp: Bitmap = bundle.get("data") as Bitmap
                 //imagen.setImageBitmap(bmp)
                 //imageList[index] = SlideModel(bmp, "Foto cambiada")
 
-            }
-            else if (requestCode == selectFile)
-            {
+            } else if (requestCode == selectFile) {
                 val uri = data?.data
                 imageList[index] = SlideModel(uri.toString())
                 slider.setImageList(imageList)

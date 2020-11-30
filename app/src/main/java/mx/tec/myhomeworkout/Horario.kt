@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_nacimiento.btnNext
 import kotlinx.android.synthetic.main.activity_peso.*
 import mx.tec.myhomeworkout.services.IHorario
 import mx.tec.myhomeworkout.model.HorarioModel
-import mx.tec.myhomeworkout.model.ObjetivoModel
+import mx.tec.myhomeworkout.model.Objetivo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

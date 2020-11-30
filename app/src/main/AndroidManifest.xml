@@ -13,8 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Registro"></activity>
         <activity
             android:name=".MainMenu"
@@ -35,19 +35,18 @@
         <activity
             android:name=".Horario"
             android:label="@string/horario"
-            android:parentActivityName=".Objetivo"
+            android:parentActivityName=".ObjetivoAct"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Objetivo"
+            android:name=".ObjetivoAct"
             android:label="@string/meta"
             android:parentActivityName=".Peso"
             android:screenOrientation="portrait" />
         <activity
             android:name=".PaginaInicial"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar">
+            android:theme="@style/noToolBar"></activity>
 
-        </activity>
         <activity
             android:name=".PrevPhotos"
             android:label="@string/fotos"
@@ -78,8 +77,7 @@
         <activity
             android:name=".LogInAct"
             android:screenOrientation="portrait"
-            android:theme="@style/noToolBar" >
-
+            android:theme="@style/noToolBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,12 +85,14 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/splashTheme">
-        </activity>
-    </application>
 
-</manifest>
+        <activity
+        android:name=".MainActivity"
+        android:label=""
+        android:screenOrientation="portrait"
+        android:theme="@style/splashTheme">
+
+        </activity>
+</application>
+
+    </manifest>
