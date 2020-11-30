@@ -21,7 +21,7 @@ import java.util.*
 
 
 class PrevisRutina : AppCompatActivity() {
-    lateinit var idRutina: String
+    var idRutina: String = "4SYtfbDJKAlZ3SlfoR0r"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

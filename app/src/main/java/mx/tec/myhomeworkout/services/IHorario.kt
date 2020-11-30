@@ -11,7 +11,7 @@ interface IHorario {
     fun getAllHorarios(): Call<List<HorarioModel>>
 
     @GET(value="horario/{idHorario}")
-    fun getHorarioById(@Path(value="idHorario") id:Int): Call<HorarioModel>
+    fun getHorarioById(@Path(value="idHorario") id:String): Call<HorarioModel>
 
     @PUT(value="horario/")
     fun updateHorario(@Body ejercicio: HorarioModel): Call<HorarioModel>
