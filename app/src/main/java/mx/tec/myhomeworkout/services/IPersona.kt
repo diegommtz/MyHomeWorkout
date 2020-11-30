@@ -14,6 +14,9 @@ interface IPersona {
     @POST(value="persona/login/{nombrePersona}/{contrasena}")
     fun login(@Path(value="nombrePersona") usuario: String?, @Path(value="contrasena") contrasena: String?) : Call<String>
 
+    @POST(value="persona/entrenamiento/{idPersona}")
+    fun aumentarEntrenamiento(@Path(value="idPersona") idPersona: String?) : Call<String>
+
     @POST("persona/")
     fun createPersona(@Body persona: Persona?) : Call<String>
 

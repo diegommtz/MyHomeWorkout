@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_monitorea_progreso_fotos.*
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterFoto
@@ -27,10 +28,12 @@ class MonitoreaProceso : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monitorea_progreso_fotos)
 
-        //val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
-        //val idUsuario = sp.getString("idUsuario", "ERROR")!!
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
+        //bottomNavigation.setSelectedItemId(R.id.home)
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
 
-        val idUsuario = "pGEn22yIclf6ZSqGB7YR";
+        val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
+        val idUsuario = sp.getString("idUsuario", "ERROR")!!
 
 
         // FOTOS LIST
@@ -52,6 +55,31 @@ class MonitoreaProceso : AppCompatActivity() {
                 rvFotos.adapter = adaptador
             }
         })
+
+    }
+
+    private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_profileAct -> {
+                val intent = Intent(this@MonitoreaProceso, ProfileAct::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                //Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_monitoreoProgresoGraficas -> {
+                return@OnNavigationItemSelectedListener false
+            }
+            R.id.navigation_paginaInicial -> {
+                val intent = Intent(this@MonitoreaProceso, PaginaInicial::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                //        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                //finish()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
 
     }
 }

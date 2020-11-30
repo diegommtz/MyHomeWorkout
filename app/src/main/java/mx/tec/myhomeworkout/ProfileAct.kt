@@ -58,6 +58,7 @@ class ProfileAct : AppCompatActivity() {
                     txtNombre.text = persona.nombre.toString()
                     tvMeta.text = persona.objetivo?.nombre.toString()
                     tvPesoInicial.text = (persona.peso.toString())
+                    tvEntrenamientos.text = persona.entrenamientos.toString()
 
 
                     if(nuevoPeso){
@@ -141,7 +142,7 @@ class ProfileAct : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_monitoreoProgresoGraficas -> {
-                val intent = Intent(this@ProfileAct, MonitoreaProgresoGraficas::class.java)
+                val intent = Intent(this@ProfileAct, MonitoreaProceso::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                 //Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
