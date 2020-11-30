@@ -9,7 +9,7 @@ interface IPersona {
     fun listPersonas(): Call<List<Persona>>
 
     @GET(value="persona/{id}")
-    fun getPersona(@Path(value="id") id: Int) : Call<Persona>
+    fun getPersona(@Path(value="id") id: String?) : Call<Persona>
 
     @POST("persona/")
     fun createPersona(@Body persona: Persona?) : Call<String>

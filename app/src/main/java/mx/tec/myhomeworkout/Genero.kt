@@ -36,7 +36,7 @@ class Genero : AppCompatActivity() {
                 intent.putExtra("Persona", persona)
                 startActivity(intent)
             }else {
-                persona.genero= "Mujer"
+                persona.genero= "Hombre"
                 intent.putExtra("Persona", persona)
                 startActivity(intent)
             }

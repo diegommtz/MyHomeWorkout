@@ -16,9 +16,9 @@ interface IObjetivo {
     fun updateObjetivo(@Body ejercicio: Objetivo): Call<Objetivo>
 
     @POST("objetivo/")
-    fun createObjetivo(@Body ejercicio: Objetivo?): Call<Objetivo>
+    fun createObjetivo(@Body ejercicio: Objetivo?): Call<String>
 
     @DELETE("objetivo/{idObjetivo}/")
-    fun deleteObjetivo(@Path("idObjetivo") id: Int): Call<Objetivo>
+    fun deleteObjetivo(@Path("idObjetivo") id: Int): Call<String>
 
 }

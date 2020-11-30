@@ -2,10 +2,9 @@ package mx.tec.myhomeworkout
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
@@ -14,9 +13,7 @@ import mx.tec.myhomeworkout.services.IMusculo
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterEntrenador
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementEntrenador
-import mx.tec.myhomeworkout.elemento.modelo.ElementSimpleExercise
 import mx.tec.myhomeworkout.model.Ejercicio
-import mx.tec.myhomeworkout.model.Musculo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +34,7 @@ class PaginaInicial : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
 
         val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
+
         tvWelcomeMessage.setText(txt)
 
         // EJERCICIOS LIST
@@ -45,17 +43,24 @@ class PaginaInicial : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(IEjercicio::class.java)
-        service.getAllEjercicios().enqueue(object: Callback<List<Ejercicio>> {
+        service.getAllEjercicios().enqueue(object : Callback<List<Ejercicio>> {
             override fun onFailure(call: Call<List<Ejercicio>>, t: Throwable) {
                 Log.e("Workout-API", "Error obteniendo datos de ejercicios")
                 Log.e("Workout-API", t.message!!)
             }
             override fun onResponse(call: Call<List<Ejercicio>>, response: Response<List<Ejercicio>>) {
+
                 ejercicios = response.body()!!
                 Log.e("Workout-API", ejercicios.toString())
 
-                val adaptador = CustomAdapterSimpleExercise(this@PaginaInicial, R.layout.simple_exercise, ejercicios, 0)
-                rvLista.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
+                val adaptador = CustomAdapterSimpleExercise(
+                    this@PaginaInicial,
+                    R.layout.simple_exercise,
+                    ejercicios,
+                    0
+                )
+                rvLista.layoutManager =
+                    LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
                 rvLista.adapter = adaptador
             }
         })
@@ -67,8 +72,14 @@ class PaginaInicial : AppCompatActivity() {
             ElementEntrenador(R.drawable.entrenador_fer, "Fer"),
             ElementEntrenador(R.drawable.entrenador_nava, "Nava")
         )
-        val adaptador_entrenador = CustomAdapterEntrenador(this@PaginaInicial, R.layout.layout_entrenadores, entrenadores, 0)
-        rvLista_entrenadores.layoutManager = LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
+        val adaptador_entrenador = CustomAdapterEntrenador(
+            this@PaginaInicial,
+            R.layout.layout_entrenadores,
+            entrenadores,
+            0
+        )
+        rvLista_entrenadores.layoutManager =
+            LinearLayoutManager(this@PaginaInicial, LinearLayoutManager.HORIZONTAL, false)
         rvLista_entrenadores.adapter = adaptador_entrenador
 
         //ONLICK LOOK TODAYS RUTINE
@@ -96,7 +107,7 @@ class PaginaInicial : AppCompatActivity() {
             R.id.navigation_monitoreoProgresoGraficas -> {
                 val intent = Intent(this@PaginaInicial, MonitoreaProgresoGraficas::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                        //Intent.FLAG_ACTIVITY_CLEAR_TASK
+                //Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
 
                 return@OnNavigationItemSelectedListener true
