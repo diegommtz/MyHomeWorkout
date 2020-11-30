@@ -69,9 +69,9 @@ class ObjetivoAct : AppCompatActivity() {
         btnOkObjetivo.setOnClickListener{
             var objetivoTexto: String
             if(btnPerderPeso.isChecked){
-                objetivoTexto = "Ganar músculo"
-            }else if(btnGanarMusculo.isChecked){
                 objetivoTexto = "Perder peso"
+            }else if(btnGanarMusculo.isChecked){
+                objetivoTexto = "Ganar músculo"
             }else{
                 objetivoTexto = "Estar en forma"
             }
