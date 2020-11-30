@@ -3,7 +3,7 @@
     <string name="app_name_space">My Home Workout</string>
     <string name="createAccountInfo">Crear una cuenta te permite tener control de tu progreso.</string>
     <string name="user_input">Usuario:</string>
-    <string name="Password_input">Contraseña:</string>
+    <string name="Password_input">Contraseña: (Mínimo 5 caracteres)</string>
     <string name="Password_input2">Confirmar contraseña:</string>
     <string name="LogIn">Iniciar Sesión</string>
     <string name="registro">Registrar cuenta</string>

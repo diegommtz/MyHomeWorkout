@@ -72,3 +72,6 @@ class LogInAct : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
+//if (persona.objetivo == perderpeso)
+//        GetRutina/idRutinaPerderPeso
