@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.webkit.URLUtil
 import android.widget.MediaController
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,6 +47,10 @@ class HaciendoEjercicio : AppCompatActivity() {
     private var resumeFromMillis: Long = 0
 
     lateinit var idRutina: String
+    lateinit var rutina: Rutina
+    lateinit var ejercicios: List<Ejercicio>
+    var ejerIndex = 0
+    var ejerTimer: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,9 +93,6 @@ class HaciendoEjercicio : AppCompatActivity() {
         // ------------------
         // ------------------
         // ------------------
-
-        val ejercicios: List<Ejercicio> = rutina.ejercicio
-        val index = 0;
 
         val dayArray =
             resources.getStringArray(R.array.dayArray)//tomamos los valores que tenemos en los recursos
@@ -150,6 +152,9 @@ class HaciendoEjercicio : AppCompatActivity() {
 
         //Con un mismo botón: inicio, pause, resumo
         btnPause.setOnClickListener {
+
+            if(ejerTimer == false) return@setOnClickListener
+
             if (itera == 0) {// Start the timer
                 timer(millisInFuture, countDownInterval).start()
                 //it.isEnabled = false
@@ -191,13 +196,52 @@ class HaciendoEjercicio : AppCompatActivity() {
 
         service.getRutinaById(idRutina).enqueue(object : Callback<Rutina> {
             override fun onResponse(call: Call<Rutina>, response: Response<Rutina>) {
-                val rutina = response.body()
+                rutina = response.body()!!
+                ejercicios = rutina.ejercicios
+
+                txtExercise.text = rutina.nombre
+
+                startTraining()
             }
 
             override fun onFailure(call: Call<Rutina>, t: Throwable) {
                 t.message?.let { Log.e("RESTLIBS", it) }
             }
         })
+    }
+
+    fun startTraining() {
+
+        //Obtener el ejercicio correspondiente
+        val actEjercicio = ejercicios[ejerIndex]
+
+        //Resetear timer si es que hay tiempo
+        if(actEjercicio.repeticiones == false)
+        {
+            ejerTimer = true
+            Toast.makeText(this, "TIEMPOOO", Toast.LENGTH_SHORT).show()
+            millisInFuture = (actEjercicio.cantidadTiempo)!!.toLong() * 1000
+            timer(millisInFuture, countDownInterval).start()
+        }
+
+        //Obtener el video
+        videoView
+
+        val onlineUri = Uri.parse(actEjercicio.video)
+        videoView!!.setVideoURI(onlineUri)
+        videoView!!.setMediaController(null)
+        videoView!!.setOnPreparedListener {
+            mp -> mp.isLooping = true
+            videoView!!.start()
+        }
+        videoView!!.requestFocus()
+        videoView!!.start()
+
+        //Obtener nombre
+        txtExerciseName.text = actEjercicio.nombre
+
+        //Obtener repeticiones/tiempo
+        txtTiempoFaltante.text = actEjercicio.cantidadTiempo.toString()
     }
     // ------------------
     // ------------------
@@ -253,44 +297,22 @@ class HaciendoEjercicio : AppCompatActivity() {
     }
 
     fun changeVideo(view: View) {
-        if (i + 1 >= videoNames.size) {
+
+        if (ejerIndex + 1 >= ejercicios.size) {
             val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
             startActivity(intent)
         } else {
-            i++
-            initPlayer()
+            ejerIndex++
+            startTraining()
         }
 
     }
 
     fun changeVideoBack(view: View) {
-        if (i - 1 >= 0) {
-            i--
-            initPlayer()
-
+        if (ejerIndex - 1 >= 0) {
+            ejerIndex--
+            startTraining()
         }
-    }
-
-    private fun initPlayer() {
-        var videoUri: Uri = getURI(videoNames[i])
-        videoView.setVideoURI(videoUri)
-        videoView.setMediaController(null)
-        videoView.setOnPreparedListener { mp -> mp.isLooping = true }
-        videoView.start()
-    }
-
-    private fun releasePlayer() {
-        videoView.stopPlayback()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        releasePlayer()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        initPlayer()
     }
 
     override fun onPause() {
