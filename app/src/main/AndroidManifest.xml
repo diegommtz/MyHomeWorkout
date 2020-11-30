@@ -32,7 +32,8 @@
         </activity>
         <activity android:name=".Grafica" />
         <activity android:name=".MonitoreaProgresoGraficas" />
-        <activity android:name=".MonitoreaProceso" />
+        <activity android:name=".MonitoreaProceso">
+        </activity>
         <activity
             android:name=".Horario"
             android:label="@string/horario"

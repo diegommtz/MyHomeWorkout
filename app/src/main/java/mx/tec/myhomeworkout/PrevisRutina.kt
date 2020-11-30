@@ -45,8 +45,11 @@ class PrevisRutina : AppCompatActivity() {
                 Log.e("Workout-API", rutina.ejercicios[1].toString())
                 Log.e("Workout-API", rutina.ejercicios[1].musculos?.get(0)?.nombre.toString())
 
+                tvNombreRutina.setText(rutina.nombre)
+                tvTiempoEstimado.setText(rutina.tiempoEstimado + " minutos")
+
                 var ejerciciosRutina = rutina.ejercicios
-                val adaptador = CustomAdapterEjercicioRutina(this@PrevisRutina, R.layout.layout_ejercicio_rutina, ejerciciosRutina, 0)
+                val adaptador = CustomAdapterEjercicioRutina(this@PrevisRutina, R.layout.layout_ejercicio_rutina, ejerciciosRutina, 0, layoutInflater)
                 rvEjerciciosRutina.layoutManager = LinearLayoutManager(this@PrevisRutina, LinearLayoutManager.VERTICAL, false)
                 rvEjerciciosRutina.adapter = adaptador
             }
