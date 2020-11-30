@@ -63,9 +63,15 @@ class CustomAdapterEjercicioRutina(
                     dialog.dismiss()
                 }
 
-                var tvNombreDiag = dialogView.findViewById<TextView>(R.id.tvNombreDiag)
-                tvNombreDiag.setText(elemento.nombre)
+                dialogView.findViewById<TextView>(R.id.tvNombreDiag).setText(elemento.nombre)
+                dialogView.findViewById<TextView>(R.id.tvDificultad).setText(elemento.dificultad)
+                dialogView.findViewById<TextView>(R.id.tvFocalizacion).setText(elemento.focalizacion)
 
+                var musculos = ""
+                for (e in elemento.musculos!!){
+                    musculos = musculos  + e.nombre + ", "
+                }
+                dialogView.findViewById<TextView>(R.id.tvMusculosDiag).setText(musculos)
 
                 //VIDEO
                 var video = dialogView.findViewById<VideoView>(R.id.vvDialog)

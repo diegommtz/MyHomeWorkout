@@ -33,7 +33,8 @@ class PaginaInicial : AppCompatActivity() {
         //bottomNavigation.setSelectedItemId(R.id.home)
         bottomNavigation.setOnNavigationItemSelectedListener(navigationCrack)
 
-        val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
+        //val txt =  getString(R.string.estas_a_parte1) + " 3 " + getString(R.string.estas_a_parte2)
+        val txt = "¡Estas más cerca de tu peso ideal!"
 
         tvWelcomeMessage.setText(txt)
 

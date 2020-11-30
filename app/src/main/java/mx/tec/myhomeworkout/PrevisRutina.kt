@@ -85,7 +85,6 @@ class PrevisRutina : AppCompatActivity() {
                     }
                 })
             }
-
             override fun onFailure(call: Call<Persona>, t: Throwable) {
                 t.message?.let { Log.e("RESTLIBS", it) }
             }
