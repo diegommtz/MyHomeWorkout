@@ -34,7 +34,7 @@ class ProfileAct : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(IPersona::class.java)
-        val idPersona = sp.getString("idPersona","")
+        val idPersona = sp.getString("idUsuario","")
         println("soy el ID")
         println(idPersona)
             service.getPersona(idPersona).enqueue(object : Callback<Persona> {

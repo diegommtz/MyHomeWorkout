@@ -32,7 +32,7 @@ import kotlin.collections.ArrayList
 
 class PrevPhotos : AppCompatActivity() {
 
-    val storage = FirebaseStorage.getInstance()
+    //val storage = FirebaseStorage.getInstance()
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
@@ -96,7 +96,7 @@ class PrevPhotos : AppCompatActivity() {
                         .show()
                     with(sp.edit()){
                         putString("idUsuario", response.body())
-                        apply()
+                        commit()
                     }
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                             Intent.FLAG_ACTIVITY_CLEAR_TASK
