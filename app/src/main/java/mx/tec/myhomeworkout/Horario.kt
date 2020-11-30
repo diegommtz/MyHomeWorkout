@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TimePicker
 import android.widget.Toast
 import android.widget.ToggleButton
 import kotlinx.android.synthetic.main.activity_horario.*
@@ -35,17 +36,7 @@ class Horario : AppCompatActivity() {
         val boolHorario: Array<Boolean> = arrayOf(false, false, false, false, false, false, false)
         var myhour:Int=0
         var myminute:Int=0
-//        var d: Boolean = false
-//        var l: Boolean = false
-//        var m: Boolean = false
-//        var mm: Boolean = false
-//        var j: Boolean = false
-//        var v: Boolean = false
-//        var s: Boolean = false
 
-//        val dia = timePicker1.dayOfMonth.toString()
-//        val mes = (timePicker1.month + 1).toString()
-//        val anio = timePicker1.year.toString()
 
         val toggleD: ToggleButton = findViewById(R.id.toggleButton)
         val togglel: ToggleButton = findViewById(R.id.toggleButton2)
@@ -77,27 +68,18 @@ class Horario : AppCompatActivity() {
             boolHorario[6] = isChecked
         }
 
-        //val mPickTimeBtn = findViewById<Button>(R.id.timePicker1)
-        //val textView     = findViewById<TextView>(R.id.timeTv)
-
-//        mPickTimeBtn.setOnClickListener {
-//            val cal = Calendar.getInstance()
-//            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-//                cal.set(Calendar.HOUR_OF_DAY, hour)
-//                cal.set(Calendar.MINUTE, minute)
-//                myhour=cal.get(hour)
-//                myminute=cal.get(minute)
-//            }
-//            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
-//        }
-
+        timePicker1.setOnTimeChangedListener(TimePicker.OnTimeChangedListener { timePicker, hour, minute ->
+            //textView.text = "Hour: "+ hour + " Minute : "+ minute
+            myhour=hour
+            myminute=minute
+        })
 
 
         btnNext.setOnClickListener {
             val persona = intent.getSerializableExtra("Persona") as? Persona
             //val objetivo= intent.getSerializableExtra("Objetivo") as? ObjetivoModel
 
-            val tHorario = HorarioModel("0", 1, 1, boolHorario[0],
+            val tHorario = HorarioModel("0", myminute, myhour, boolHorario[0],
                 boolHorario[1], boolHorario[2], boolHorario[3], boolHorario[4], boolHorario[5],
                 boolHorario[6])
             val intent = Intent(this@Horario, PrevPhotos::class.java)
@@ -115,3 +97,5 @@ class Horario : AppCompatActivity() {
     }
 
 }
+
+
