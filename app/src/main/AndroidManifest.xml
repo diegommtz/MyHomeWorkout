@@ -31,9 +31,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".Grafica" />
-        <activity android:name=".MonitoreaProgresoGraficas" />
+        <activity android:name=".MonitoreaProgresoGraficas" >
+        </activity>
 
-        <activity android:name=".MonitoreaProceso" />
+        <activity android:name=".MonitoreaProceso"
+            android:label="Monitorea tu proceso">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Horario"
             android:label="@string/horario"
@@ -81,11 +89,7 @@
             android:name=".LogInAct"
             android:screenOrientation="portrait"
             android:theme="@style/noToolBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

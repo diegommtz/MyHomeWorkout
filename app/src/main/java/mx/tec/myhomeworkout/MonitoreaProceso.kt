@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_monitorea_progreso_fotos.*
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterFoto
@@ -54,4 +55,30 @@ class MonitoreaProceso : AppCompatActivity() {
         })
 
     }
+
+    private val navigationCrack = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_profileAct -> {
+                return@OnNavigationItemSelectedListener false
+            }
+            R.id.navigation_monitoreoProgresoGraficas -> {
+                val intent = Intent(this@MonitoreaProceso, MonitoreaProgresoGraficas::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                //Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_paginaInicial -> {
+                val intent = Intent(this@MonitoreaProceso, PaginaInicial::class.java)
+                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                //        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                //finish()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+
+    }
+
 }

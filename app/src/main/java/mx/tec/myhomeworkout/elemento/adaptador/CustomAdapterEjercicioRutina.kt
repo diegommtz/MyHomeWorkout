@@ -64,6 +64,8 @@ class CustomAdapterEjercicioRutina(
                 }
 
                 var tvNombreDiag = dialogView.findViewById<TextView>(R.id.tvNombreDiag)
+                tvNombreDiag.setText(elemento.nombre)
+
 
                 //VIDEO
                 var video = dialogView.findViewById<VideoView>(R.id.vvDialog)
