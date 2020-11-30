@@ -61,6 +61,7 @@ class HaciendoEjercicio : AppCompatActivity() {
         // ------------------
         val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
         val idUsuario = sp.getString("idUsuario", "")
+
         var idObjetivo: String
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -74,13 +75,7 @@ class HaciendoEjercicio : AppCompatActivity() {
             override fun onResponse(call: Call<Persona>, response: Response<Persona>) {
                 val persona = response.body()
                 idObjetivo = persona?.objetivo!!.idObjetivo
-
-                if(idObjetivo == "qhuIw5EkYioU4ulOj330")
-                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
-                if(idObjetivo == "sRQW9JyHhqDlOBHA8pQQ")
-                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
-                if(idObjetivo == "sRQW9JyHhqDlOBHA8pQQ")
-                    idRutina = "4SYtfbDJKAlZ3SlfoR0r"
+                idRutina = sp.getString("idRutina", "4SYtfbDJKAlZ3SlfoR0r")!!
 
                 getRutina()
             }
