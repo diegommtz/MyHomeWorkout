@@ -9,7 +9,7 @@ interface IRutina {
     fun getAllRutinas(): Call<List<Rutina>>
 
     @GET(value="rutina/{idRutina}")
-    fun getRutinaById(@Path(value="idRutina") id:Int): Call<Rutina>
+    fun getRutinaById(@Path(value="idRutina") id: String): Call<Rutina>
 
     @PUT(value="rutina/")
     fun updateRutina( @Body rutina:Rutina): Call<Rutina>
