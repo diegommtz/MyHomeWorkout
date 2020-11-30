@@ -2,15 +2,16 @@ package mx.tec.myhomeworkout
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_profile.*
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import mx.tec.myhomeworkout.services.IPersona
+import kotlinx.android.synthetic.main.activity_profile.*
 import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IPersona
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -24,6 +25,22 @@ class ProfileAct : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.mnuConfiguracion -> {
+                val preferences = getSharedPreferences("mhw",  Context.MODE_PRIVATE)
+                preferences.edit().remove("idUsario").apply()
+                val intent = Intent(this@ProfileAct, LogInAct::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -31,9 +48,9 @@ class ProfileAct : AppCompatActivity() {
         lateinit var persona: Persona
 
         var idPersona: String? = ""
-        var altura: Int?
-        val nuevoPeso = intent.getBooleanExtra("peso",false)
-        val nuevoObjetivo = intent.getBooleanExtra("objetivo",false)
+        var altura: Float?
+        val nuevoPeso = intent.getBooleanExtra("peso", false)
+        val nuevoObjetivo = intent.getBooleanExtra("objetivo", false)
 
             //Cargar datos persona
             val retrofit: Retrofit = Retrofit.Builder()
@@ -41,8 +58,7 @@ class ProfileAct : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val service = retrofit.create(IPersona::class.java)
-            idPersona = sp.getString("idUsuario","")
-            altura = sp.getInt("altura",1)
+            idPersona = sp.getString("idUsuario", "")
 
             service.getPersona(idPersona).enqueue(object : Callback<Persona> {
                 override fun onFailure(call: Call<Persona>, t: Throwable) {
@@ -58,13 +74,22 @@ class ProfileAct : AppCompatActivity() {
                     tvMeta.text = persona.objetivo?.nombre.toString()
                     tvPesoInicial.text = (persona.peso.toString())
                     tvEntrenamientos.text = persona.entrenamientos.toString()
-                    tvIMC.text = (persona.peso?.div(altura.toFloat())).toString() + "%"
+                    tvIMC.text = ((persona.altura?.div(100f))?.times(
+                        (persona.altura?.div(
+                            100f
+                        )!!)
+                    )?.let {
+                        persona.peso?.div(
+                            it
+                        )
+                    }).toString() + "%"
+                    tvPesoIdeal.text = ((persona.altura)?.minus(100)).toString() + "Kg."
 
-                    if(nuevoPeso){
-                        var pesoCambio = intent.getFloatExtra("nuevoPeso",0f)
+                    if (nuevoPeso) {
+                        var pesoCambio = intent.getFloatExtra("nuevoPeso", 0f)
                         tvPesoInicial.text = (pesoCambio.toString())
                     }
-                    if(nuevoObjetivo){
+                    if (nuevoObjetivo) {
                         var pesoObjetivo = intent.getStringExtra("nuevoObjetivo")
                         tvMeta.text = (pesoObjetivo.toString())
                     }
@@ -110,23 +135,33 @@ class ProfileAct : AppCompatActivity() {
                 persona.objetivo?.idObjetivo = "tZBoZlm08v1w3pYPu9ox"
             }
 
-            println("PERSONA ANTES DE ACTUALIZAR")
-            println(persona)
             service.updatePersona(persona).enqueue(object : Callback<Persona> {
                 override fun onFailure(call: Call<Persona>, t: Throwable) {
                     t.message?.let { Log.e("RESTLIBS", it) }
                 }
 
-                override fun onResponse(call: Call<Persona>, response: retrofit2.Response<Persona>) {
+                override fun onResponse(
+                    call: Call<Persona>,
+                    response: retrofit2.Response<Persona>
+                ) {
                     Toast.makeText(
                         this@ProfileAct,
                         "Se actualizó la información",
                         Toast.LENGTH_SHORT
                     ).show()
-                    println(response.body())
+                    tvIMC.text = ((persona.altura?.div(100f))?.times(
+                        (persona.altura?.div(
+                            100f
+                        )!!)
+                    )?.let {
+                        persona.peso?.div(
+                            it
+                        )
+                    }).toString() + "%"
                 }
             })
         }
+
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
         //bottomNavigation.setSelectedItemId(R.id.home)
@@ -142,15 +177,15 @@ class ProfileAct : AppCompatActivity() {
             }
             R.id.navigation_monitoreoProgresoGraficas -> {
                 val intent = Intent(this@ProfileAct, MonitoreaProceso::class.java)
-                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                //Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_paginaInicial -> {
                 val intent = Intent(this@ProfileAct, PaginaInicial::class.java)
-                //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                //        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 //finish()
                 return@OnNavigationItemSelectedListener true
@@ -159,5 +194,6 @@ class ProfileAct : AppCompatActivity() {
         false
 
     }
+
 
 }

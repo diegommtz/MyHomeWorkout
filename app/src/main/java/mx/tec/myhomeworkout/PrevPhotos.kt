@@ -105,9 +105,6 @@ class PrevPhotos : AppCompatActivity() {
                     val serviceHorario = retrofitHorario.create(IHorario::class.java)
 
                     val idUsuario = response.body()!!
-                    val altura = persona?.altura
-                    println("HOLA------")
-                    println(altura)
 
                     serviceHorario.createHorario(idUsuario, horario!!).enqueue(object :
                         Callback<String> {
@@ -128,10 +125,6 @@ class PrevPhotos : AppCompatActivity() {
                                 .show()
                             with(sp.edit()) {
                                 putString("idUsuario", idUsuario)
-                                if (altura != null) {
-                                    println("ENTRO A ALTURA")
-                                    putInt("altura", altura)
-                                }
                                 commit()
                             }
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or

@@ -20,15 +20,20 @@ class Registro : AppCompatActivity() {
         var contrasena2 = txtContrasenaRegistro2.text.toString()
 
         if(nombre != "" && contrasena != "" && contrasena2!= ""){
-           if(contrasena==contrasena2)
-           {
-               val intent = Intent(this@Registro, Genero::class.java)
-               val persona = Persona("",nombre,contrasena,0, "","",null,0f, 0)
-               intent.putExtra("Persona", persona)
-               startActivity(intent)
-           }else{
-               Toast.makeText(this@Registro, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
-           }
+            if(contrasena.length >= 5){
+                if(contrasena==contrasena2)
+                {
+                    val intent = Intent(this@Registro, Genero::class.java)
+                    val persona = Persona("",nombre,contrasena,0, "","",null,0f, 0)
+                    intent.putExtra("Persona", persona)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this@Registro, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(this@Registro, "La contraseña debe tener mínimo 5 caracteres", Toast.LENGTH_SHORT).show()
+
+            }
         }else{
             Toast.makeText(this@Registro, "Favor de completar los campos faltantes", Toast.LENGTH_SHORT).show()
         }
