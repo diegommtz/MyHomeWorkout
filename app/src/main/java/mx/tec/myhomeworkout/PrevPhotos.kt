@@ -7,15 +7,21 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.models.SlideModel
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
+import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IPersona
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class PrevPhotos : AppCompatActivity() {
-
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
@@ -55,12 +61,28 @@ class PrevPhotos : AppCompatActivity() {
 
 
             //TODO: POST DE PERSONA
+            val persona = intent.getSerializableExtra("Persona") as? Persona
 
-            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-            Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+
+            service.createPersona(persona).enqueue(object : Callback<String> {
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    t.message?.let { Log.e("RESTLIBS", it) }
+                }
+
+                override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                    val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+                    Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+            })
+            //--------------
         }
 
         /*

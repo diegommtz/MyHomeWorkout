@@ -31,11 +31,11 @@
         android:id="@+id/tiempo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/round_corners_btn"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tvTiempoEstimado"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="30 Minutos"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvTiempoEstimadoStatic"
@@ -51,12 +51,12 @@
             android:layout_height="wrap_content"
             android:text="Tiempo estimado"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvParent"
+        android:id="@+id/rvEjerciciosRutina"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

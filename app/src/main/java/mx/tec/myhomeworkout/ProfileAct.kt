@@ -3,11 +3,18 @@ package mx.tec.myhomeworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_profile.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import mx.tec.myhomeworkout.services.IPersona
+import mx.tec.myhomeworkout.model.Persona
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 
 class ProfileAct : AppCompatActivity() {
@@ -19,6 +26,34 @@ class ProfileAct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        val idPersona = intent.getStringExtra("idPersona")
+        lateinit var persona: Persona
+        //Cargar datos persona
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.100.9:3000/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IPersona::class.java)
+
+        if (idPersona != null) {
+            service.getPersona(idPersona.toInt()).enqueue(object : Callback<Persona> {
+                override fun onFailure(call: Call<Persona>, t: Throwable) {
+                    t.message?.let { Log.e("RESTLIBS", it) }
+                }
+
+                override fun onResponse(
+                    call: Call<Persona>,
+                    response: retrofit2.Response<Persona>
+                ) {
+                    persona= response.body()!!
+                    txtNombre.text = persona.nombre.toString()
+                    tvMeta.text = persona.objetivo.toString()
+                    tvPesoInicial.text = (persona.peso.toString())
+                }
+            })
+        }
+        //--------------------------------------------
+
 
         btnMeta.setOnClickListener{
             //Toast.makeText(this@ProfileAct, "MAIN usuario  password", Toast.LENGTH_LONG).show();

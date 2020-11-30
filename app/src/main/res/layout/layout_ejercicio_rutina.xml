@@ -6,11 +6,19 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="-10dp">
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -25,11 +33,11 @@
 
         <ImageButton
             android:id="@+id/btnEjercicioDetalles"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="#00FFFFFF"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:background="@drawable/circular_btn"
             android:scaleType="center"
-            app:srcCompat="@drawable/informacion" />
+            app:srcCompat="@android:drawable/ic_menu_info_details" />
 
     </LinearLayout>
 
@@ -41,7 +49,7 @@
         app:srcCompat="@drawable/img_mujer_plancking" />
 
     <TextView
-        android:id="@+id/tvRepeticiones"
+        android:id="@+id/tvRepeticionesTiempo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
