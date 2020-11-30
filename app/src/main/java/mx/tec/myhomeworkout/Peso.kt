@@ -27,7 +27,7 @@ class Peso : AppCompatActivity() {
             if (persona != null) {
                 persona.peso = pesoUnidadesPicker.value.toFloat() + (pesoDecimalesPicker.value).toFloat()/10
             }
-            val intent = Intent(this@Peso, Objetivo::class.java)
+            val intent = Intent(this@Peso, ObjetivoAct::class.java)
             intent.putExtra("Persona", persona)
             startActivity(intent)
         }

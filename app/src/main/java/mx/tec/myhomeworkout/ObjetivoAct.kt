@@ -3,21 +3,15 @@ package mx.tec.myhomeworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_genero.*
 import kotlinx.android.synthetic.main.activity_objetivo.*
 import kotlinx.android.synthetic.main.activity_objetivo.btnNext
 import kotlinx.android.synthetic.main.activity_peso.*
-import mx.tec.myhomeworkout.services.IPersona
+import mx.tec.myhomeworkout.model.Objetivo
 import mx.tec.myhomeworkout.model.Persona
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.sql.SQLOutput
 
-class Objetivo : AppCompatActivity() {
+class ObjetivoAct : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,20 +42,20 @@ class Objetivo : AppCompatActivity() {
             val persona = intent.getSerializableExtra("Persona") as? Persona
 
             if(persona!=null){
+                var objetivo : Objetivo
                 if(btnPerderPeso.isChecked){
-                    persona.objetivo = "sRQW9JyHhqDlOBHA8pQQ"
+                    objetivo = Objetivo("sRQW9JyHhqDlOBHA8pQQ", "")
                 }else if(btnGanarMusculo.isChecked){
-                    persona.objetivo = "qhuIw5EkYioU4ulOj330"
+                    objetivo = Objetivo("qhuIw5EkYioU4ulOj330", "")
                 }else{
-                    persona.objetivo = "tZBoZlm08v1w3pYPu9ox"
+                    objetivo = Objetivo("tZBoZlm08v1w3pYPu9ox", "")
                 }
+                persona.objetivo = objetivo
             }
 
-            val intent = Intent(this@Objetivo, Horario::class.java)
+            val intent = Intent(this@ObjetivoAct, Horario::class.java)
             intent.putExtra("Persona", persona)
             startActivity(intent)
-
-
 
         }
 

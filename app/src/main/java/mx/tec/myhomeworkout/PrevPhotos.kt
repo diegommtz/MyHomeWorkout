@@ -2,18 +2,18 @@ package mx.tec.myhomeworkout
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.models.SlideModel
 import kotlinx.android.synthetic.main.activity_prev_photos.*
-import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
 import mx.tec.myhomeworkout.model.Persona
 import mx.tec.myhomeworkout.services.IPersona
 import retrofit2.Call
@@ -25,14 +25,18 @@ class PrevPhotos : AppCompatActivity() {
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
-    val imagesTitles = arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
-    val imageList = ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+    val imagesTitles =
+        arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
+    val imageList =
+        ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prev_photos)
+        val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
 
-        if(savedInstanceState != null) return
+        if (savedInstanceState != null) return
 
         //replaceFragment(MarcoFrente(), R.string.foto_frontal)
 
@@ -44,14 +48,14 @@ class PrevPhotos : AppCompatActivity() {
 
         slider.setImageList(imageList)
 
-        slider.setItemChangeListener(object : ItemChangeListener{
+        slider.setItemChangeListener(object : ItemChangeListener {
             override fun onItemChanged(position: Int) {
                 index = position;
                 tvAltura.setText(imagesTitles[index])
             }
         })
 
-        pickerFoto.setOnClickListener{
+        pickerFoto.setOnClickListener {
             SelectImage()
         }
 
@@ -76,7 +80,12 @@ class PrevPhotos : AppCompatActivity() {
 
                 override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
                     val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                    Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
+                        .show()
+                    with(sp.edit()){
+                        putString("idUsuario", response.body())
+                        apply()
+                    }
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                             Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
@@ -107,13 +116,12 @@ class PrevPhotos : AppCompatActivity() {
         fragmentTransaction.commit()
     }*/
 
-    fun SelectImage()
-    {
+    fun SelectImage() {
         val items = arrayOf("Camera", "Gallery", "Cancel")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Elige una opción")
         builder.setItems(items) { dialog, which ->
-            when(items[which]) {
+            when (items[which]) {
                 "Camera" -> {
                     val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(i, requestCamera)
@@ -121,7 +129,10 @@ class PrevPhotos : AppCompatActivity() {
                 "Gallery" -> {
                     val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     i.type = "image/*"
-                    startActivityForResult(Intent.createChooser(i, "Selecciona una imagen"), selectFile)
+                    startActivityForResult(
+                        Intent.createChooser(i, "Selecciona una imagen"),
+                        selectFile
+                    )
                 }
                 "Cancel" -> {
                     dialog.dismiss()
@@ -129,21 +140,18 @@ class PrevPhotos : AppCompatActivity() {
             }
         }
         builder.show()
-     }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK)
-        {
-            if(requestCode == requestCamera){
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == requestCamera) {
                 val bundle: Bundle = data?.extras!!
                 val bmp: Bitmap = bundle.get("data") as Bitmap
                 //imagen.setImageBitmap(bmp)
                 //imageList[index] = SlideModel(bmp, "Foto cambiada")
 
-            }
-            else if (requestCode == selectFile)
-            {
+            } else if (requestCode == selectFile) {
                 val uri = data?.data
                 imageList[index] = SlideModel(uri.toString())
                 slider.setImageList(imageList)
