@@ -1,6 +1,5 @@
 package mx.tec.myhomeworkout.services
 
-import com.google.gson.JsonObject
 import mx.tec.myhomeworkout.model.Persona
 import retrofit2.Call
 import retrofit2.http.*
@@ -18,9 +17,9 @@ interface IPersona {
     @POST("persona/")
     fun createPersona(@Body persona: Persona?) : Call<String>
 
-    @PUT("persona/{id}")
-    fun updatePersona(@Path(value="id") id: Int, @Body persona: Persona?) : Call<String>
+    @PUT(value="persona/")
+    fun updatePersona(@Body persona: Persona) : Call<Persona>
 
     @DELETE("persona/{id}")
-    fun deletePersona(@Path(value="id") id: Int) : Call<String>
+    fun deletePersona(@Path(value="id") id: String?) : Call<String>
 }

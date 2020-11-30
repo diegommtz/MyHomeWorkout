@@ -10,5 +10,6 @@ data class Persona (
     var genero: String?,
     var nacimiento: String?,
     var objetivo: Objetivo?,
-    var peso: Float?
+    var peso: Float?,
+    var entrenamientos: Int?
 ) : Serializable {}
