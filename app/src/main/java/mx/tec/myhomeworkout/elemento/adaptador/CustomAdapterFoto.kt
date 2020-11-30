@@ -45,8 +45,8 @@ class CustomAdapterFoto(
         //establece los valores
         fun bindData(elemento: Foto){
 
-            val sc = elemento.fecha["_seconds"].asLong
-            val fechaStr = getDate(sc, "dd/MM/yyyy")
+            val sc = elemento.fecha?.get("_seconds")?.asLong
+            val fechaStr = sc?.let { getDate(it, "dd/MM/yyyy") }
 
             txtFecha!!.text = fechaStr
             Picasso.get().load(elemento.fotoDerecha).into(imagenLado)

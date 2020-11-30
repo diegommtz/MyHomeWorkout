@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.media.Image
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,12 +23,15 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
+import mx.tec.myhomeworkout.model.Foto
 import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Persona
+import mx.tec.myhomeworkout.services.IFoto
 import mx.tec.myhomeworkout.services.IHorario
 import mx.tec.myhomeworkout.services.IPersona
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -35,7 +39,7 @@ import kotlin.collections.ArrayList
 
 class PrevPhotos : AppCompatActivity() {
 
-    //val storage = FirebaseStorage.getInstance()
+    val storage = FirebaseStorage.getInstance()
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
@@ -43,8 +47,12 @@ class PrevPhotos : AppCompatActivity() {
         arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
     val imageList =
         ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+    lateinit var uriStorage: Uri
 
-
+    var frentePhotoUrl: String = ""
+    var espaldaPhotoUrl: String= ""
+    var ladoPhotoUrl: String= ""
+    lateinit var idUsuario: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,11 +84,8 @@ class PrevPhotos : AppCompatActivity() {
 
         btnNext.setOnClickListener {
 
-            //TODO: POST DE HORARIO
 
-
-
-            //TODO: POST DE PERSONA
+            //POST DE PERSONA
             val persona = intent.getSerializableExtra("Persona") as? Persona
 
             val retrofit: Retrofit = Retrofit.Builder()
@@ -104,10 +109,8 @@ class PrevPhotos : AppCompatActivity() {
                         .build()
                     val serviceHorario = retrofitHorario.create(IHorario::class.java)
 
-                    val idUsuario = response.body()!!
+                    idUsuario = response.body()!!
                     val altura = persona?.altura
-                    println("HOLA------")
-                    println(altura)
 
                     serviceHorario.createHorario(idUsuario, horario!!).enqueue(object :
                         Callback<String> {
@@ -119,24 +122,8 @@ class PrevPhotos : AppCompatActivity() {
                             call: Call<String>,
                             response: retrofit2.Response<String>
                         ) {
-                            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                            Toast.makeText(
-                                this@PrevPhotos,
-                                "¡Tu perfil se ha creado!",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                            with(sp.edit()) {
-                                putString("idUsuario", idUsuario)
-                                if (altura != null) {
-                                    println("ENTRO A ALTURA")
-                                    putInt("altura", altura)
-                                }
-                                commit()
-                            }
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
+
+                            CreateFotos()
                         }
                     })
 
@@ -144,18 +131,7 @@ class PrevPhotos : AppCompatActivity() {
                 }
             })
 
-
-
-            //--------------
         }
-
-        /*@RequiresApi(Build.VERSION_CODES.KITKAT)
-        fun UploadPhoto(){
-            val path = "cuerpo/" + UUID.randomUUID() + ".png"
-            val firePathRef = storage.getReference(path)
-            val metadata = StorageMetadata.Builder().setCustomMetadata("caption", "hola").build()
-            uploadTask = firePathRef.putBytes(data, metadata)
-        }*/
 
         /*
         btnEspalda.setOnClickListener {
@@ -168,6 +144,67 @@ class PrevPhotos : AppCompatActivity() {
             replaceFragment(MarcoPerfil(), R.string.foto_perfil)
         }
         * */
+    }
+
+    fun CreateFotos() {
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(IFoto::class.java)
+
+        val foto = Foto("", null, ladoPhotoUrl, frentePhotoUrl, espaldaPhotoUrl)
+
+        service.CreateFoto(idUsuario, foto).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+                val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
+                val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+                Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT).show()
+                with(sp.edit()) {
+                    putString("idUsuario", idUsuario)
+                    commit()
+                }
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.message?.let { Log.e("RESTLIBS", it) }
+            }
+
+        })
+
+
+    }
+
+    fun UploadPhoto() {
+
+        val randUuid = UUID.randomUUID()
+        val path = "cuerpo/$randUuid.png"
+        val firePathRef = storage.getReference(path)
+
+        firePathRef.putFile(uriStorage)
+            .addOnSuccessListener {
+                val bucket: String = storage.reference.bucket
+                val fileName: String = it.metadata?.reference?.name.toString()
+
+                if(index == 0){
+                    frentePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/$bucket/o/cuerpo%2F$fileName?alt=media&token=$randUuid"
+                    Log.e("entro", "aqui");
+                }
+                if(index == 1)
+                    espaldaPhotoUrl = "https://firebasestorage.googleapis.com/v0/b/$bucket/o/cuerpo%2F$fileName?alt=media&token=$randUuid"
+                if(index == 2)
+                    ladoPhotoUrl = "https://firebasestorage.googleapis.com/v0/b/$bucket/o/cuerpo%2F$fileName?alt=media&token=$randUuid"
+
+            }
+            .addOnFailureListener{
+                Log.e("Firebase", it.message.toString())
+            }
     }
 
     /*
@@ -216,6 +253,11 @@ class PrevPhotos : AppCompatActivity() {
 
             } else if (requestCode == selectFile) {
                 val uri = data?.data
+
+                uriStorage = uri!!
+                UploadPhoto()
+                Log.e("UPDATED", "UPDATED")
+
                 imageList[index] = SlideModel(uri.toString())
                 slider.setImageList(imageList)
             }

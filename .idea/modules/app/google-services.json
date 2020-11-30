@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "130077035707",
+    "firebase_url": "https://myhomeworkout-e41f4.firebaseio.com",
+    "project_id": "myhomeworkout-e41f4",
+    "storage_bucket": "myhomeworkout-e41f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130077035707:android:44c90b9310f67bdd6cad9e",
+        "android_client_info": {
+          "package_name": "mx.tec.myhomeworkout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130077035707-plv5thtdrfaf20e3jkfvdpbd9d56747s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.tec.myhomeworkout",
+            "certificate_hash": "d15dc498cdb99fd9020a943af94917cdb48fca2d"
+          }
+        },
+        {
+          "client_id": "130077035707-01c073mt8v9p5v2mbe8lgt7egdgignat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRo-NQ7ATgcW5-9lhKW-zuGazYufBTuRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130077035707-01c073mt8v9p5v2mbe8lgt7egdgignat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

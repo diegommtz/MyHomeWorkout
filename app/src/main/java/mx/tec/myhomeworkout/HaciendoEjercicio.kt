@@ -46,6 +46,7 @@ class HaciendoEjercicio : AppCompatActivity() {
     private var isCancelled = false
     private var resumeFromMillis: Long = 0
 
+    lateinit var idUsuario: String
     lateinit var idRutina: String
     lateinit var rutina: Rutina
     lateinit var ejercicios: List<Ejercicio>
@@ -60,7 +61,7 @@ class HaciendoEjercicio : AppCompatActivity() {
         // ------------------
         // ------------------
         val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
-        val idUsuario = sp.getString("idUsuario", "")
+        idUsuario = sp.getString("idUsuario", "")!!
         var idObjetivo: String
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -299,8 +300,24 @@ class HaciendoEjercicio : AppCompatActivity() {
     fun changeVideo(view: View) {
 
         if (ejerIndex + 1 >= ejercicios.size) {
-            val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
-            startActivity(intent)
+
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+
+            service.aumentarEntrenamiento(idUsuario).enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    val intent = Intent(this@HaciendoEjercicio, PosRutina::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    t.message?.let { Log.e("RESTLIBS", it) }
+                }
+            })
+
         } else {
             ejerIndex++
             startTraining()
