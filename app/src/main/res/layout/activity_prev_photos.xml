@@ -101,6 +101,18 @@
             android:text="Elige una foto"
             android:textColor="#FFFFFF" />
 
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/circular_btn"
+            android:text="OK"
+            android:textColor="#FFFFFF" />
+
         <ImageView
             android:id="@+id/imagen"
             android:layout_width="match_parent"

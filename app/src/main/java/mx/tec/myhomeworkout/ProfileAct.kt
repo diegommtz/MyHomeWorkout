@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_profile.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import mx.tec.myhomeworkout.services.IPersona
@@ -28,15 +29,21 @@ class ProfileAct : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         val sp = getSharedPreferences("mhw", Context.MODE_PRIVATE)
         lateinit var persona: Persona
-        //Cargar datos persona
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(IPersona::class.java)
-        val idPersona = sp.getString("idUsuario","")
-        println("soy el ID")
-        println(idPersona)
+
+        var idPersona: String? = ""
+        var altura: Int?
+        val nuevoPeso = intent.getBooleanExtra("peso",false)
+        val nuevoObjetivo = intent.getBooleanExtra("objetivo",false)
+
+            //Cargar datos persona
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+            idPersona = sp.getString("idUsuario","")
+            altura = sp.getInt("altura",1)
+
             service.getPersona(idPersona).enqueue(object : Callback<Persona> {
                 override fun onFailure(call: Call<Persona>, t: Throwable) {
                     t.message?.let { Log.e("RESTLIBS----", it) }
@@ -47,20 +54,28 @@ class ProfileAct : AppCompatActivity() {
                     response: retrofit2.Response<Persona>
                 ) {
                     persona = response.body()!!
-                    println("ALO")
-                    println(persona)
                     txtNombre.text = persona.nombre.toString()
-                    tvMeta.text = persona.objetivo.toString()
+                    tvMeta.text = persona.objetivo?.nombre.toString()
                     tvPesoInicial.text = (persona.peso.toString())
+                    tvEntrenamientos.text = persona.entrenamientos.toString()
+                    tvIMC.text = (persona.peso?.div(altura.toFloat())).toString() + "%"
+
+                    if(nuevoPeso){
+                        var pesoCambio = intent.getFloatExtra("nuevoPeso",0f)
+                        tvPesoInicial.text = (pesoCambio.toString())
+                    }
+                    if(nuevoObjetivo){
+                        var pesoObjetivo = intent.getStringExtra("nuevoObjetivo")
+                        tvMeta.text = (pesoObjetivo.toString())
+                    }
                 }
             })
 
-        //--------------------------------------------
-
-
+            //--------------------------------------------
         btnMeta.setOnClickListener{
             //Toast.makeText(this@ProfileAct, "MAIN usuario  password", Toast.LENGTH_LONG).show();
             val intent = Intent(this@ProfileAct, ObjetivoAct::class.java)
+            intent.putExtra("persistObjetivo", persona.objetivo?.nombre.toString())
             intent.putExtra("invisible", "true")
             startActivity(intent)
         }
@@ -72,7 +87,45 @@ class ProfileAct : AppCompatActivity() {
         btnPesoInicial.setOnClickListener{
             val intent = Intent(this@ProfileAct, Peso::class.java)
             intent.putExtra("invisible", "true")
+            intent.putExtra("persistPeso", persona.peso)
             startActivity(intent)
+        }
+
+        btnActualizar.setOnClickListener{
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(IPersona::class.java)
+
+            val peso = tvPesoInicial.text.toString().toFloat()
+            persona.peso=peso
+            val objetivo = tvMeta.text.toString()
+
+            if(objetivo.equals("Ganar músculo")){
+                persona.objetivo?.idObjetivo = "qhuIw5EkYioU4ulOj330"
+            }else if(objetivo.equals("Perder peso")){
+                persona.objetivo?.idObjetivo = "sRQW9JyHhqDlOBHA8pQQ"
+            }else{
+                persona.objetivo?.idObjetivo = "tZBoZlm08v1w3pYPu9ox"
+            }
+
+            println("PERSONA ANTES DE ACTUALIZAR")
+            println(persona)
+            service.updatePersona(persona).enqueue(object : Callback<Persona> {
+                override fun onFailure(call: Call<Persona>, t: Throwable) {
+                    t.message?.let { Log.e("RESTLIBS", it) }
+                }
+
+                override fun onResponse(call: Call<Persona>, response: retrofit2.Response<Persona>) {
+                    Toast.makeText(
+                        this@ProfileAct,
+                        "Se actualizó la información",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    println(response.body())
+                }
+            })
         }
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
@@ -88,7 +141,7 @@ class ProfileAct : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener false
             }
             R.id.navigation_monitoreoProgresoGraficas -> {
-                val intent = Intent(this@ProfileAct, MonitoreaProgresoGraficas::class.java)
+                val intent = Intent(this@ProfileAct, MonitoreaProceso::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                 //Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

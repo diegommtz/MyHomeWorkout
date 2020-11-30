@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -20,8 +21,10 @@ import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
+import kotlinx.android.synthetic.main.activity_peso.*
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import kotlinx.android.synthetic.main.activity_prev_photos.btnNext
+import kotlinx.android.synthetic.main.activity_prev_photos.tvAltura
 import mx.tec.myhomeworkout.model.HorarioModel
 import mx.tec.myhomeworkout.model.Persona
 import mx.tec.myhomeworkout.services.IHorario
@@ -97,26 +100,41 @@ class PrevPhotos : AppCompatActivity() {
                 override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
 
 
-                    val horario=intent.getSerializableExtra("Horario") as? HorarioModel
+                    val horario = intent.getSerializableExtra("Horario") as? HorarioModel
                     val retrofitHorario: Retrofit = Retrofit.Builder()
                         .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                     val serviceHorario = retrofitHorario.create(IHorario::class.java)
 
-                    val idUsuario=response.body()!!
+                    val idUsuario = response.body()!!
+                    val altura = persona?.altura
+                    println("HOLA------")
+                    println(altura)
 
-                    serviceHorario.createHorario(idUsuario,horario!!).enqueue(object : Callback<String> {
+                    serviceHorario.createHorario(idUsuario, horario!!).enqueue(object :
+                        Callback<String> {
                         override fun onFailure(call: Call<String>, t: Throwable) {
                             t.message?.let { Log.e("RESTLIBS", it) }
                         }
 
-                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                        override fun onResponse(
+                            call: Call<String>,
+                            response: retrofit2.Response<String>
+                        ) {
                             val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                            Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                this@PrevPhotos,
+                                "¡Tu perfil se ha creado!",
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
-                            with(sp.edit()){
+                            with(sp.edit()) {
                                 putString("idUsuario", idUsuario)
+                                if (altura != null) {
+                                    println("ENTRO A ALTURA")
+                                    putInt("altura", altura)
+                                }
                                 commit()
                             }
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
@@ -124,7 +142,6 @@ class PrevPhotos : AppCompatActivity() {
                             startActivity(intent)
                         }
                     })
-
 
 
                 }
@@ -154,6 +171,29 @@ class PrevPhotos : AppCompatActivity() {
             replaceFragment(MarcoPerfil(), R.string.foto_perfil)
         }
         * */
+
+        // SET VISIBILITY ELEMENTS
+        val invisible = intent.getStringExtra("invisible")
+
+        if (invisible == "true"){
+            //hide bext button
+            btnNext.visibility = View.INVISIBLE
+            //show OK button and send to home
+            btnOk.visibility = View.VISIBLE
+        }else{
+            //show bext button
+            btnNext.visibility = View.VISIBLE
+            //hide OK button and send to home
+            btnOk.visibility = View.INVISIBLE
+        }
+        btnOk.setOnClickListener {
+            //TODO CRGAR FOTO A DB
+
+            val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+            Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     /*

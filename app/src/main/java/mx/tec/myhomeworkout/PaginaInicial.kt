@@ -105,7 +105,7 @@ class PaginaInicial : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_monitoreoProgresoGraficas -> {
-                val intent = Intent(this@PaginaInicial, MonitoreaProgresoGraficas::class.java)
+                val intent = Intent(this@PaginaInicial, MonitoreaProceso::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                 //Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

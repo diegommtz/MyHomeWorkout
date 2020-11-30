@@ -84,13 +84,4 @@
         android:onClick="crearCuenta"
         android:text="@string/crear_cuenta"
         android:textColor="@color/azul_link" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/fb"
-        android:shadowColor="#FFFFFF"
-        android:text="@string/fblog"
-        android:textColor="#FFFFFF" />
 </LinearLayout>
