@@ -31,6 +31,7 @@ class ProfileAct : AppCompatActivity() {
         lateinit var persona: Persona
 
         var idPersona: String? = ""
+        var altura: Int?
         val nuevoPeso = intent.getBooleanExtra("peso",false)
         val nuevoObjetivo = intent.getBooleanExtra("objetivo",false)
 
@@ -41,8 +42,8 @@ class ProfileAct : AppCompatActivity() {
                 .build()
             val service = retrofit.create(IPersona::class.java)
             idPersona = sp.getString("idUsuario","")
-            println("soy el ID")
-            println(idPersona)
+            altura = sp.getInt("altura",1)
+
             service.getPersona(idPersona).enqueue(object : Callback<Persona> {
                 override fun onFailure(call: Call<Persona>, t: Throwable) {
                     t.message?.let { Log.e("RESTLIBS----", it) }
@@ -53,13 +54,11 @@ class ProfileAct : AppCompatActivity() {
                     response: retrofit2.Response<Persona>
                 ) {
                     persona = response.body()!!
-                    println("ALO")
-                    println(persona)
                     txtNombre.text = persona.nombre.toString()
                     tvMeta.text = persona.objetivo?.nombre.toString()
                     tvPesoInicial.text = (persona.peso.toString())
                     tvEntrenamientos.text = persona.entrenamientos.toString()
-
+                    tvIMC.text = (persona.peso?.div(altura.toFloat())).toString() + "%"
 
                     if(nuevoPeso){
                         var pesoCambio = intent.getFloatExtra("nuevoPeso",0f)

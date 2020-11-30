@@ -97,26 +97,41 @@ class PrevPhotos : AppCompatActivity() {
                 override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
 
 
-                    val horario=intent.getSerializableExtra("Horario") as? HorarioModel
+                    val horario = intent.getSerializableExtra("Horario") as? HorarioModel
                     val retrofitHorario: Retrofit = Retrofit.Builder()
                         .baseUrl("http://${getString(R.string.ipAddress)}:3000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                     val serviceHorario = retrofitHorario.create(IHorario::class.java)
 
-                    val idUsuario=response.body()!!
+                    val idUsuario = response.body()!!
+                    val altura = persona?.altura
+                    println("HOLA------")
+                    println(altura)
 
-                    serviceHorario.createHorario(idUsuario,horario!!).enqueue(object : Callback<String> {
+                    serviceHorario.createHorario(idUsuario, horario!!).enqueue(object :
+                        Callback<String> {
                         override fun onFailure(call: Call<String>, t: Throwable) {
                             t.message?.let { Log.e("RESTLIBS", it) }
                         }
 
-                        override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                        override fun onResponse(
+                            call: Call<String>,
+                            response: retrofit2.Response<String>
+                        ) {
                             val intent = Intent(this@PrevPhotos, PaginaInicial::class.java)
-                            Toast.makeText(this@PrevPhotos, "¡Tu perfil se ha creado!", Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                this@PrevPhotos,
+                                "¡Tu perfil se ha creado!",
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
-                            with(sp.edit()){
+                            with(sp.edit()) {
                                 putString("idUsuario", idUsuario)
+                                if (altura != null) {
+                                    println("ENTRO A ALTURA")
+                                    putInt("altura", altura)
+                                }
                                 commit()
                             }
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
@@ -124,7 +139,6 @@ class PrevPhotos : AppCompatActivity() {
                             startActivity(intent)
                         }
                     })
-
 
 
                 }
