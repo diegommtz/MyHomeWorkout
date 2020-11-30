@@ -88,6 +88,18 @@
         android:textColor="#000000"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btnActualizarObjetivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/circular_btn"
+        android:text="Guardar cambios"
+        android:textColor="#FFFFFF"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

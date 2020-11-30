@@ -1,5 +1,6 @@
-package mx.tec.myhomeworkout.data
+package mx.tec.myhomeworkout.services
 
+import mx.tec.myhomeworkout.Horario
 import mx.tec.myhomeworkout.model.HorarioModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,9 +17,9 @@ interface IHorario {
     fun updateHorario(@Body ejercicio: HorarioModel): Call<HorarioModel>
 
     @POST("horario/")
-    fun createHorario(@Body ejercicio: HorarioModel?): Call<HorarioModel>
+    fun createHorario(@Body ejercicio: HorarioModel): Call<String>
 
     @DELETE("horario/{idHorario}/")
-    fun deleteHorario(@Path("idHorario") id: Int): Call<HorarioModel>
+    fun deleteHorario(@Path("idHorario") id: Int): Call<String>
 
 }

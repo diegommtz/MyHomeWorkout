@@ -3,10 +3,12 @@ package mx.tec.myhomeworkout.model
 import java.io.Serializable
 
 data class Persona (
-    val idPersona: String,
-    val altura: Float,
-    val genero: String,
-    val nacimiento: String,
-    val objetivo: Objetivo,
-    val peso: Float
+    var idPersona: Int?,
+    var nombre: String?,
+    var contrasena: String?,
+    var altura: Int?,
+    var genero: String?,
+    var nacimiento: String?,
+    var objetivo: String?,
+    var peso: Float?
 ) : Serializable {}

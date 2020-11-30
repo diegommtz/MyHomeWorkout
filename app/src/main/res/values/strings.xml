@@ -21,7 +21,7 @@
     <string name="imc2">IMC: </string>
     <string name="meta">Meta</string>
     <string name="horario">Horario</string>
-    <string name="peso_inicial">Peso Inicial</string>
+    <string name="peso_actual">Peso actual</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="perfil">Perfil</string>
     <string name="genero">Género</string>
