@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_pagina_inicial.*
-import mx.tec.myhomeworkout.data.IEjercicio
-import mx.tec.myhomeworkout.data.IMusculo
+import mx.tec.myhomeworkout.services.IEjercicio
+import mx.tec.myhomeworkout.services.IMusculo
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterEntrenador
 import mx.tec.myhomeworkout.elemento.adaptador.CustomAdapterSimpleExercise
 import mx.tec.myhomeworkout.elemento.modelo.ElementEntrenador

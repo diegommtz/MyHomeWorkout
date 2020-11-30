@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ipAddress">10.0.0.17</string>
+    <string name="ipAddress">192.168.0.21</string>
 </resources>
