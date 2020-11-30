@@ -1,18 +1,25 @@
 package mx.tec.myhomeworkout
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.media.Image
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
 import kotlinx.android.synthetic.main.activity_prev_photos.*
 import mx.tec.myhomeworkout.model.Persona
 import mx.tec.myhomeworkout.services.IPersona
@@ -20,8 +27,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PrevPhotos : AppCompatActivity() {
+
+    val storage = FirebaseStorage.getInstance()
     val selectFile: Int = 0
     val requestCamera = 1
     var index = 0;
@@ -29,6 +40,7 @@ class PrevPhotos : AppCompatActivity() {
         arrayListOf(R.string.foto_frontal, R.string.foto_espalda, R.string.foto_perfil)
     val imageList =
         ArrayList<SlideModel>() // Create image list. https://github.com/denzcoskun/ImageSlideshow
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,8 +103,19 @@ class PrevPhotos : AppCompatActivity() {
                     startActivity(intent)
                 }
             })
+
+
+
             //--------------
         }
+
+        /*@RequiresApi(Build.VERSION_CODES.KITKAT)
+        fun UploadPhoto(){
+            val path = "cuerpo/" + UUID.randomUUID() + ".png"
+            val firePathRef = storage.getReference(path)
+            val metadata = StorageMetadata.Builder().setCustomMetadata("caption", "hola").build()
+            uploadTask = firePathRef.putBytes(data, metadata)
+        }*/
 
         /*
         btnEspalda.setOnClickListener {

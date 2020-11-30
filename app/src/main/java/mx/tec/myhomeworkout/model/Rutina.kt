@@ -2,7 +2,7 @@ package mx.tec.myhomeworkout.model
 
 import java.io.Serializable
 
-class Rutina(
+data class Rutina(
     val idRutina: String,
     val ejercicios: List<Ejercicio>,
     val objetivo: Objetivo
